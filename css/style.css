@@ -13,6 +13,41 @@ a.navbar-brand:hover {
     color: black;
 }
 
+.modal-link {
+    color: black;
+}
+
+a.modal-link:hover {
+    color: black;
+}
+
+.btn-nav {
+    background-color: #ff8465;
+    font-family: 'Yeon Sung', cursive;
+    font-weight: bolder;
+    font-size: 17pt;
+    color: black;
+    opacity: 65%;
+}
+
+.btn-nav:hover {
+    opacity: 100%;
+}
+
+.btn-modal {
+    background-color: #ff8465;
+    font-weight: bolder;
+    color: black;
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
 .table-color {
     background-color: #ff8465;
 }
