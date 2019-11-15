@@ -26,7 +26,7 @@ let adminPageData = (function() {
         const lastTableRow = document.createElement("td");
         lastTableRow.append(removeButton);
         tableRow.append(lastTableRow);
-        const tbody = document.querySelector("#tableOfUsers > tbody");
+        const tbody = document.querySelector("#table-of-users > tbody");
         
         tbody.append(tableRow);
     });
