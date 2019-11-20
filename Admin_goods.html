@@ -25,7 +25,7 @@
                                <div class="modal-dialog" role="document">
                                    <div class="modal-content">
                                        <div class="modal-header text-center">
-                                           <h3 class="modal-title w-100 font-weight-bold" id="about-modal">About</h3>
+                                           <h3 class="modal-title w-100 font-weight-bold" id="about-modal-title">About</h3>
                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                <span aria-hidden="true">&times;</span>
                                            </button>
@@ -46,7 +46,7 @@
                                <div class="modal-dialog" role="document">
                                    <div class="modal-content">
                                        <div class="modal-header text-center">
-                                           <h3 class="modal-title w-100 font-weight-bold" id="contact-modal">Contact</h3>
+                                           <h3 class="modal-title w-100 font-weight-bold" id="contact-modal-title">Contact</h3>
                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                <span aria-hidden="true">&times;</span>
                                            </button>
@@ -84,7 +84,7 @@
            </div>
            
            <div class="card-columns">
-               <div class="card box-shadow">
+               <div class="card box-shadow" id="add-good">
                    <div class="card-body text-center">
                        <h5 class="card-title">Add a new game</h5>
                        <button type="button" class="btn btn-color btn-rounded" data-toggle="modal" data-target="#add-good-modal">
@@ -95,20 +95,20 @@
                                <div class="modal-dialog" role="document">
                                    <div class="modal-content">
                                        <div class="modal-header text-center">
-                                           <h3 class="modal-title w-100 font-weight-bold" id="add-good-modal">Add a new game</h3>
+                                           <h3 class="modal-title w-100 font-weight-bold" id="add-good-modal-title">Add a new game</h3>
                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                <span aria-hidden="true">&times;</span>
                                            </button>
                                        </div>
                                        <div class="modal-body">
-                                           <form>
+                                           <form id="add-good-form">
                                                <div class="form-group">
                                                    <label for="Title">Title</label>
                                                    <input class="form-control" type="text" id="title">
                                                </div>
                                                <div class="form-group">
                                                    <label for="Description">Description</label>
-                                                   <textarea class="form-control" name="Description"></textarea>
+                                                   <textarea class="form-control" id="description"></textarea>
                                                </div>
                                                <div class="form-group">
                                                    <label for="Title">Price</label>
