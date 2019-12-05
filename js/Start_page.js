@@ -1,107 +1,138 @@
-"use strict";
-
-let startGoodsData = (function() {
+const startGoodsData = (function () {
   function renderGoodsData() {
-    let goodsData = dataGood.getGoods();
-    goodsData.forEach(function(good) {
-      const card = document.createElement("div");
-      card.classList.add("card", "box-shadow");
+    const goodsData = dataGood.getGoods();
+    goodsData.forEach((good) => {
+      const card = $('<div/>').addClass('card box-shadow');
 
-      const image = document.createElement("img");
-      image.classList.add("card-img-top");
-      image.setAttribute("src", good.picture);
-      image.setAttribute("alt", good.title);
-      card.append(image);
+      $('<img/>', {
+        class: 'card-img-top',
+        src: good.picture,
+        alt: good.title,
+      }).appendTo(card);
 
-      const cardBody = document.createElement("div");
-      cardBody.classList.add("card-body");
+      const cardBody = $('<div/>').addClass('card-body');
 
-      const cardTitle = document.createElement("h5");
-      cardTitle.classList.add("card-title", "text-center");
-      cardTitle.textContent = good.title;
-      cardBody.append(cardTitle);
+      $('<h5/>', {
+        class: 'card-title text-center',
+        text: good.title,
+      }).appendTo(cardBody);
 
-      const cardText = document.createElement("p");
-      cardText.classList.add("card-text", "text-justify");
-      cardText.textContent = good.description;
-      cardBody.append(cardText);
+      $('<p/>', {
+        class: 'card-text text-justify',
+        text: good.description,
+      }).appendTo(cardBody);
 
-      const cardTag = document.createElement("p");
-      cardTag.classList.add("card-text");
-      const small = document.createElement("small");
-      small.classList.add("text-muted");
-      small.textContent = good.tags;
-      cardTag.append(small);
-      cardBody.append(cardTag);
-      card.append(cardBody);
+      const cardTag = $('<p/>').addClass('card-text');
 
-      const cardColumns = document.querySelector(".card-columns");
-      cardColumns.prepend(card);
+      $('<small/>', {
+        class: 'text-muted',
+        text: good.tags,
+      }).appendTo(cardTag);
+
+      cardTag.appendTo(cardBody);
+      cardBody.appendTo(card);
+
+      $('.card-columns').prepend(card);
     });
   }
 
   function cleanRegisterForm() {
-    $("#input-fname").val("");
-    $("#input-lname").val("");
-    $("#input-email").val("");
-    $("#input-pass").val("");
+    $('#input-fname')
+      .val('')
+      .removeClass('is-valid');
+    $('#input-lname')
+      .val('')
+      .removeClass('is-valid');
+    $('#input-email')
+      .val('')
+      .removeClass('is-valid');
+    $('#input-pass')
+      .val('')
+      .removeClass('is-valid');
   }
 
   function cleanLoginForm() {
-    $("#input-login-email").val("");
-    $("#input-login-pass").val("");
+    $('#input-login-email').val('');
+    $('#input-login-pass').val('');
   }
 
-  $("#add-new-user").submit(function(event) {
-    event.preventDefault();
-    let newUser = {
-      name: $("#input-fname").val(),
-      fname: $("#input-lname").val(),
-      mail: $("#input-email").val(),
-      pass: $("#input-pass").val(),
-      role: "user",
-      deleteRequest: false
+  function addNewUserHandler() {
+    const newUser = {
+      name: $('#input-fname').val(),
+      fname: $('#input-lname').val(),
+      mail: $('#input-email').val(),
+      pass: $('#input-pass').val(),
+      role: 'user',
+      deleteRequest: false,
     };
-    $("#log-or-reg-modal").modal("hide");
+    $('#log-or-reg-modal').modal('hide');
     dataUser.addUser(newUser);
     cleanRegisterForm();
+  }
+
+  $(document).ready(() => {
+    $('#add-new-user').validate({
+      messages: {
+        'input-fname': 'This field is required',
+        'input-lname': 'This field is required',
+        'input-email': {
+          required: 'This field is required',
+          email: 'You should enter email',
+        },
+        'input-pass': {
+          required: 'This field is required',
+          minlength: 'Password should consist of a minimum of 5 symbols',
+        },
+      },
+      highlight(element) {
+        $(element)
+          .addClass('is-invalid')
+          .removeClass('is-valid');
+      },
+      unhighlight(element) {
+        $(element)
+          .addClass('is-valid')
+          .removeClass('is-invalid');
+      },
+      submitHandler: addNewUserHandler,
+    });
   });
 
-  $("#login-user").submit(function(event) {
+  $('#login-user').submit((event) => {
     event.preventDefault();
-    let loginUser = {
-      mail: $("#input-login-email").val(),
-      pass: $("#input-login-pass").val()
+    const loginUser = {
+      mail: $('#input-login-email').val(),
+      pass: $('#input-login-pass').val(),
     };
-    let foundUser = dataUser.getUserByEmail(loginUser.mail);
+    const foundUser = dataUser.getUserByEmail(loginUser.mail);
     if (foundUser) {
       if (foundUser.pass === loginUser.pass) {
         dataUser.setActiveUser(foundUser);
         cleanLoginForm();
-        $("#log-or-reg-modal").modal("hide");
+        $('#log-or-reg-modal').modal('hide');
         checkForRedirect();
       } else {
-        alert("You enter a wrong password!");
+        alert('You enter a wrong password!');
       }
     } else {
-      alert("You enter a wrong e-mail!");
+      alert('You enter a wrong e-mail!');
     }
   });
 
   function checkForRedirect() {
     dataGood.addDefaultGoods();
     dataUser.addDefaultUsers();
-    let activeUser = dataUser.getActiveUser();
+    const activeUser = dataUser.getActiveUser();
     if (!activeUser) {
       return;
     }
-    if (activeUser.role === "user") {
-      document.location.href = "/pages/User_goods.html";
-    } else if (activeUser.role === "admin") {
-      document.location.href = "/pages/Admin_goods.html";
+    if (activeUser.role === 'user') {
+      document.location.href = '/pages/User_goods.html';
+    } else if (activeUser.role === 'admin') {
+      document.location.href = '/pages/Admin_goods.html';
     }
   }
 
   checkForRedirect();
   renderGoodsData();
-})();
+}());

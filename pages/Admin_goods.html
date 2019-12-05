@@ -34,6 +34,8 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src="../js/Data_user.js" defer></script>
     <script src="../js/Data_good.js" defer></script>
     <script src="../js/Admin_goods.js" defer></script>
@@ -233,36 +235,64 @@
                   </div>
                   <div class="modal-body">
                     <form id="add-good-form">
-                      <div class="form-group">
-                        <label for="Title">Title</label>
-                        <input class="form-control" type="text" id="title" />
-                      </div>
-                      <div class="form-group">
-                        <label for="Description">Description</label>
-                        <textarea
-                          class="form-control"
-                          id="description"
-                        ></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="Title">Price</label>
-                        <input class="form-control" type="number" id="price" />
-                      </div>
-                      <div class="form-group">
-                        <label for="Title">Picture</label>
-                        <input class="form-control" type="url" id="picture" />
-                      </div>
-                      <div class="form-group">
-                        <label for="Tags">Tags</label>
-                        <textarea class="form-control" id="tags"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <input
-                          type="submit"
-                          value="Create"
-                          class="btn btn-modal"
-                        />
-                      </div>
+                      <fieldset>
+                        <div class="form-group">
+                          <label for="title">Title</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            id="title"
+                            name="title"
+                            required
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="description">Description</label>
+                          <textarea
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            required
+                          ></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="price">Price</label>
+                          <input
+                            class="form-control"
+                            type="number"
+                            id="price"
+                            name="price"
+                            min="0"
+                            required
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="picture">Picture</label>
+                          <input
+                            class="form-control"
+                            type="url"
+                            id="picture"
+                            name="picture"
+                            required
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="tags">Tags</label>
+                          <textarea
+                            class="form-control"
+                            id="tags"
+                            name="tags"
+                            required
+                          ></textarea>
+                        </div>
+                        <div class="form-group">
+                          <input
+                            type="submit"
+                            value="Create"
+                            class="btn btn-modal"
+                          />
+                        </div>
+                      </fieldset>
                     </form>
                   </div>
                   <div class="modal-footer">

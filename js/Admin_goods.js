@@ -1,144 +1,157 @@
-"use strict";
-
-let adminGoodsData = (function() {
+const adminGoodsData = (function () {
   function renderGoodsData() {
-    let goodsData = dataGood.getGoods();
-    goodsData.forEach(function(good) {
-      const card = document.createElement("div");
-      card.classList.add("card", "box-shadow");
+    const goodsData = dataGood.getGoods();
+    goodsData.forEach((good) => {
+      const card = $('<div/>').addClass('card box-shadow');
 
-      const image = document.createElement("img");
-      image.classList.add("card-img-top");
-      image.setAttribute("src", good.picture);
-      image.setAttribute("alt", good.title);
-      card.append(image);
+      $('<img/>', {
+        class: 'card-img-top',
+        src: good.picture,
+        alt: good.title,
+      }).appendTo(card);
 
-      const cardBody = document.createElement("div");
-      cardBody.classList.add("card-body");
+      const cardBody = $('<div/>').addClass('card-body');
 
-      const cardTitle = document.createElement("h5");
-      cardTitle.classList.add("card-title", "text-center");
-      cardTitle.textContent = good.title;
-      cardBody.append(cardTitle);
+      $('<h5/>', {
+        class: 'card-title text-center',
+        text: good.title,
+      }).appendTo(cardBody);
 
-      const cardText = document.createElement("p");
-      cardText.classList.add("card-text", "text-justify");
-      cardText.textContent = good.description;
-      cardBody.append(cardText);
+      $('<p/>', {
+        class: 'card-text text-justify',
+        text: good.description,
+      }).appendTo(cardBody);
 
-      const cardTag = document.createElement("p");
-      cardTag.classList.add("card-text");
-      const small = document.createElement("small");
-      small.classList.add("text-muted");
-      small.textContent = good.tags;
-      cardTag.append(small);
-      cardBody.append(cardTag);
+      const cardTag = $('<p/>').addClass('card-text');
 
-      const cardButton = document.createElement("div");
-      cardButton.classList.add("text-center");
-      const buyButton = document.createElement("a");
-      buyButton.classList.add(
-        "btn",
-        "btn-color",
-        "btn-rounded",
-        "my-1",
-        "mx-1"
-      );
-      buyButton.setAttribute("href", "#");
-      buyButton.textContent = `Buy for ${good.price}$`;
-      const buttonImg = document.createElement("i");
-      buttonImg.classList.add(
-        "fas",
-        "fa-angle-right",
-        "rounded-circle",
-        "ml-1",
-        "style-circle"
-      );
-      buyButton.append(buttonImg);
-      cardButton.append(buyButton);
-      const deleteButton = document.createElement("button");
-      deleteButton.classList.add(
-        "btn",
-        "btn-color",
-        "btn-rounded",
-        "my-1",
-        "mx-1"
-      );
-      deleteButton.setAttribute("href", "#");
-      deleteButton.textContent = "Delete";
-      deleteButton.onclick = goodRemoveButtonHandler;
-      const deleteImg = document.createElement("i");
-      deleteImg.classList.add(
-        "fas",
-        "fa-times",
-        "rounded-circle",
-        "ml-1",
-        "style-circle"
-      );
-      deleteButton.append(deleteImg);
-      cardButton.append(deleteButton);
-      cardBody.append(cardButton);
-      card.append(cardBody);
+      $('<small/>', {
+        class: 'text-muted',
+        text: good.tags,
+      }).appendTo(cardTag);
 
-      const cardColumns = document.querySelector(".card-columns");
-      cardColumns.prepend(card);
+      cardTag.appendTo(cardBody);
+
+      const cardButton = $('<div/>').addClass('text-center');
+
+      const buyButton = $('<a/>', {
+        class: 'btn btn-color btn-rounded my-1 mx-1',
+        href: '#',
+        text: `Buy for ${good.price}$`,
+      });
+
+      $('<i/>', {
+        class: 'fas fa-angle-right rounded-circle ml-1 style-circle',
+      }).appendTo(buyButton);
+
+      buyButton.appendTo(cardButton);
+
+      const deleteButton = $('<button/>', {
+        class: 'btn btn-color btn-rounded my-1 mx-1',
+        href: '#',
+        text: 'Delete',
+        click: goodRemoveButtonHandler,
+      });
+
+      $('<i/>', {
+        class: 'fas fa-times rounded-circle ml-1 style-circle',
+      }).appendTo(deleteButton);
+
+      deleteButton.appendTo(cardButton);
+      cardButton.appendTo(cardBody);
+      cardBody.appendTo(card);
+
+      $('.card-columns').prepend(card);
     });
   }
 
   function cleanGoodsData() {
-    $("#add-good")
+    $('#add-good')
       .prevUntil()
       .remove();
   }
 
   function cleanForm() {
-    $("#title").val("");
-    $("#description").val("");
-    $("#price").val("");
-    $("#picture").val("");
-    $("#tags").val("");
+    $('#title')
+      .val('')
+      .removeClass('is-valid');
+    $('#description')
+      .val('')
+      .removeClass('is-valid');
+    $('#price')
+      .val('')
+      .removeClass('is-valid');
+    $('#picture')
+      .val('')
+      .removeClass('is-valid');
+    $('#tags')
+      .val('')
+      .removeClass('is-valid');
   }
 
   function goodRemoveButtonHandler(event) {
     event.preventDefault();
     const button = $(this);
-    const currentDiv = button.parents(".card-body");
-    const currentGoodTitle = currentDiv.children(".card-title").text();
+    const currentDiv = button.parents('.card-body');
+    const currentGoodTitle = currentDiv.children('.card-title').text();
 
     dataGood.tryDeleteGoodByTitle(currentGoodTitle);
     cleanGoodsData();
     renderGoodsData();
   }
 
-  $("#add-good-form").submit(function(event) {
-    event.preventDefault();
+  function addGoodHandler() {
     const newGood = {
-      title: $("#title").val(),
-      description: $("#description").val(),
-      price: +$("#price").val(),
-      picture: $("#picture").val(),
-      tags: $("#tags").val()
+      title: $('#title').val(),
+      description: $('#description').val(),
+      price: +$('#price').val(),
+      picture: $('#picture').val(),
+      tags: $('#tags').val(),
     };
-    $("#add-good-modal").modal("hide");
+    $('#add-good-modal').modal('hide');
 
     dataGood.addGood(newGood);
     cleanForm();
     cleanGoodsData();
     renderGoodsData();
+  }
+
+  $(document).ready(() => {
+    $('#add-good-form').validate({
+      messages: {
+        title: 'This field is required',
+        description: 'This field is required',
+        price: 'This field is required',
+        picture: {
+          required: 'This field is required',
+          url: 'You should enter url',
+        },
+        tags: 'This field is required',
+      },
+      highlight(element) {
+        $(element)
+          .addClass('is-invalid')
+          .removeClass('is-valid');
+      },
+      unhighlight(element) {
+        $(element)
+          .addClass('is-valid')
+          .removeClass('is-invalid');
+      },
+      submitHandler: addGoodHandler,
+    });
   });
 
   function logoutHandler(event) {
     event.preventDefault();
     dataUser.deleteActiveUser();
-    document.location.href = "/";
+    document.location.href = '/';
   }
 
   function setEventToLogoutButton() {
-    let logoutButton = document.querySelector("#logout-button");
-    logoutButton.onclick = logoutHandler;
+    $('#logout-button').on('click', logoutHandler);
   }
 
   dataGood.addDefaultGoods();
   setEventToLogoutButton();
   renderGoodsData();
-})();
+}());

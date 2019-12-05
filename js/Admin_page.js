@@ -1,56 +1,55 @@
-"use strict";
-
-let adminPageData = (function() {
+const adminPageData = (function () {
   function renderTableOfUsers() {
-    let tableOfUsers = dataUser.getUsers();
-    tableOfUsers.forEach(function(user, index) {
-      const tableRow = document.createElement("tr");
-      const tableHeader = document.createElement("th");
-      tableHeader.textContent = index + 1;
-      tableRow.append(tableHeader);
+    const tableOfUsers = dataUser.getUsers();
+    tableOfUsers.forEach((user, index) => {
+      const tableRow = $('<tr/>');
 
-      let tableData = document.createElement("td");
-      tableData.textContent = user.name;
-      tableRow.append(tableData);
-      tableData = document.createElement("td");
-      tableData.textContent = user.fname;
-      tableRow.append(tableData);
-      tableData = document.createElement("td");
-      tableData.setAttribute("name", "user-mail");
-      tableData.textContent = user.mail;
-      tableRow.append(tableData);
-      tableData = document.createElement("td");
-      tableData.textContent = user.role;
-      tableRow.append(tableData);
-      tableData = document.createElement("td");
-      tableData.textContent = user.deleteRequest;
-      tableRow.append(tableData);
+      $('<th/>', {
+        text: index + 1,
+      }).appendTo(tableRow);
 
-      const removeButton = document.createElement("button");
-      removeButton.classList.add("btn", "btn-color");
-      removeButton.setAttribute("type", "button");
-      removeButton.setAttribute("name", "user-remove-button");
-      removeButton.onclick = userRemoveButtonHandler;
-      removeButton.textContent = "Remove";
-      const lastTableRow = document.createElement("td");
-      lastTableRow.append(removeButton);
-      tableRow.append(lastTableRow);
+      $('<td/>', {
+        text: user.name,
+      }).appendTo(tableRow);
+      $('<td/>', {
+        text: user.fname,
+      }).appendTo(tableRow);
+      $('<td/>', {
+        name: 'user-mail',
+        text: user.mail,
+      }).appendTo(tableRow);
+      $('<td/>', {
+        text: user.role,
+      }).appendTo(tableRow);
+      $('<td/>', {
+        text: user.deleteRequest,
+      }).appendTo(tableRow);
 
-      const tbody = document.querySelector("#table-of-users > tbody");
-      tbody.append(tableRow);
+      const removeButton = $('<button/>', {
+        class: 'btn btn-color',
+        type: 'button',
+        name: 'user-remove-button',
+        text: 'Remove',
+        click: userRemoveButtonHandler,
+      });
+
+      const lastTableRow = $('<td/>');
+      removeButton.appendTo(lastTableRow);
+      lastTableRow.appendTo(tableRow);
+
+      tableRow.appendTo('#table-of-users > tbody');
     });
   }
 
   function cleanUserTable() {
-    const tbody = document.querySelector("#table-of-users > tbody");
-    tbody.innerHTML = "";
+    $('#table-of-users > tbody').html('');
   }
 
   function userRemoveButtonHandler(event) {
     event.preventDefault();
     const button = $(this);
-    const currentTr = button.parents("tr");
-    const currentUserMail = currentTr.children("td[name=user-mail]").text();
+    const currentTr = button.parents('tr');
+    const currentUserMail = currentTr.children('td[name=user-mail]').text();
     if (dataUser.tryDeleteUserByEmail(currentUserMail)) {
       cleanUserTable();
       renderTableOfUsers();
@@ -60,14 +59,13 @@ let adminPageData = (function() {
   function logoutHandler(event) {
     event.preventDefault();
     dataUser.deleteActiveUser();
-    document.location.href = "/";
+    document.location.href = '/';
   }
 
   function setEventToLogoutButton() {
-    let logoutButton = document.querySelector("#logout-button");
-    logoutButton.onclick = logoutHandler;
+    $('#logout-button').on('click', logoutHandler);
   }
 
   renderTableOfUsers();
   setEventToLogoutButton();
-})();
+}());

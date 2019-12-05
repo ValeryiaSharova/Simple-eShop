@@ -34,6 +34,8 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src="js/Data_good.js" defer></script>
     <script src="js/Data_user.js" defer></script>
     <script src="js/Start_page.js" defer></script>
@@ -259,45 +261,56 @@
                         <div class="tab-pane" id="register" role="tabpanel">
                           <div class="modal-body">
                             <form id="add-new-user">
-                              <div class="form-group">
-                                <label for="input-fname">First name:</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="input-fname"
-                                />
-                              </div>
-                              <div class="form-group">
-                                <label for="input-lname">Last name:</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="input-lname"
-                                />
-                              </div>
-                              <div class="form-group">
-                                <label for="input-email">E-mail:</label>
-                                <input
-                                  type="email"
-                                  class="form-control"
-                                  id="input-email"
-                                />
-                              </div>
-                              <div class="form-group">
-                                <label for="input-pass">Password:</label>
-                                <input
-                                  type="password"
-                                  class="form-control"
-                                  id="input-pass"
-                                />
-                              </div>
-                              <div class="text-center mt-2">
-                                <input
-                                  type="submit"
-                                  value="Create account"
-                                  class="btn btn-modal"
-                                />
-                              </div>
+                              <fieldset>
+                                <div class="form-group">
+                                  <label for="input-fname">First name:</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input-fname"
+                                    name="input-fname"
+                                    required
+                                  />
+                                </div>
+                                <div class="form-group">
+                                  <label for="input-lname">Last name:</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="input-lname"
+                                    name="input-lname"
+                                    required
+                                  />
+                                </div>
+                                <div class="form-group">
+                                  <label for="input-email">E-mail:</label>
+                                  <input
+                                    type="email"
+                                    class="form-control"
+                                    id="input-email"
+                                    name="input-email"
+                                    required
+                                  />
+                                </div>
+                                <div class="form-group">
+                                  <label for="input-pass">Password:</label>
+                                  <input
+                                    type="password"
+                                    class="form-control"
+                                    id="input-pass"
+                                    name="input-pass"
+                                    minlength="5"
+                                    required
+                                  />
+                                </div>
+                                <div class="text-center mt-2">
+                                  <input
+                                    type="submit"
+                                    value="Create account"
+                                    class="btn btn-modal"
+                                  />
+                                </div>
+                              </fieldset>
                             </form>
                           </div>
                           <div class="modal-footer">
