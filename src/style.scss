@@ -1,0 +1,82 @@
+$color_1: #ff8465;
+$black: black;
+$color_2: #ffa365;
+$color_3: #ffba65;
+$white: white;
+$color_shadow: rgba(0, 0, 0, 0.05);
+
+$font_1: Yeon Sung;
+$font_2: cursive;
+
+.nav-style {
+  background-color: $color_1;
+}
+.navbar-brand {
+  color: $black;
+  font-weight: bolder;
+  font-size: 24pt;
+  font-family: $font_1, $font_2;
+}
+a {
+  &.navbar-brand:hover {
+    color: $black;
+  }
+  &.modal-link:hover {
+    color: $black;
+  }
+}
+.modal-link {
+  color: $black;
+}
+.btn-nav {
+  background-color: $color_1;
+  font-family: $font_1, $font_2;
+  font-weight: bolder;
+  font-size: 17pt;
+  color: $black;
+  opacity: 65%;
+  &:hover {
+    opacity: 100%;
+  }
+}
+.btn-modal {
+  background-color: $color_1;
+  font-weight: bolder;
+  color: $black;
+}
+.nav-link {
+  color: $black;
+  &:hover {
+    color: $black;
+  }
+}
+.table-color {
+  background-color: $color_1;
+}
+.jumbotron {
+  background-color: $color_3;
+}
+.btn-color {
+  background-color: $color_2;
+  border-color: $color_2;
+  font-weight: bolder;
+  color: $white;
+}
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem $color_shadow;
+}
+.btn-rounded {
+  border-radius: 19px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 3px;
+}
+.style-circle {
+  padding: 4px 8px;
+  background-color: $white;
+  color: $color_2;
+}
+.table .table-color th {
+  color: $black;
+  background-color: $color_2;
+}
