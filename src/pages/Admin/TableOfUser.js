@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-import Footer from "../../components/Footer";
-import { tableOfUsers } from "../../store/DataUser";
-import { string } from "prop-types";
+import React, { Component } from 'react';
+import Footer from '../../components/Footer';
+import { tableOfUsers } from '../../store/DataUser';
 
 class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: tableOfUsers
+      user: tableOfUsers,
     };
   }
 
@@ -16,10 +15,7 @@ class Table extends Component {
       <div className="container mt-3">
         <h2>Page for admin</h2>
         <hr />
-        <table
-          className="table table-hover table-borderless text-center"
-          id="table-of-users"
-        >
+        <table className="table table-hover table-borderless text-center" id="table-of-users">
           <thead className="thead-light">
             <tr className="table-color">
               <th>#</th>
@@ -41,11 +37,7 @@ class Table extends Component {
                 <td>{user.role}</td>
                 <td>{user.deleteRequest.toString()}</td>
                 <td>
-                  <button
-                    className="btn btn-color"
-                    type="button"
-                    name="user-remove-button"
-                  >
+                  <button className="btn btn-color" type="button" name="user-remove-button">
                     Remove
                   </button>
                 </td>
@@ -54,7 +46,7 @@ class Table extends Component {
           </tbody>
         </table>
         <hr />
-        <Footer></Footer>
+        <Footer />
       </div>
     );
   }

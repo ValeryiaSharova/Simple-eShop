@@ -1,32 +1,24 @@
-import React, { Component } from "react";
-import Info from "../../components/Information";
-import Footer from "../../components/Footer";
-import Card from "./Card";
-import { goodsData } from "../../store/DataGood";
+import React, { Component } from 'react';
+import Info from '../../components/Information';
+import Footer from '../../components/Footer';
+import Card from '../../components/Card';
+import { goodsData } from '../../store/DataGood';
 
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      good: goodsData.reverse()
+      good: goodsData.reverse(),
     };
   }
 
   render() {
     return (
       <div className="container mt-3">
-        <Info></Info>
+        <Info />
         <div className="card-columns">
           {this.state.good.map((good, index) => (
-            <Card
-              title={good.title}
-              description={good.description}
-              picture={good.picture}
-              tags={good.tags}
-              price={good.price}
-              key={index}
-              isAdmin={true}
-            ></Card>
+            <Card {...good} key={index} isAdmin />
           ))}
           <div className="card box-shadow" id="add-good">
             <div className="card-body text-center">
@@ -38,13 +30,13 @@ class Index extends Component {
                 data-target="#add-good-modal"
               >
                 Add
-                <i className="fas fa-plus rounded-circle ml-1 style-circle"></i>
+                <i className="fas fa-plus rounded-circle ml-1 style-circle" />
               </button>
             </div>
           </div>
         </div>
-        <hr></hr>
-        <Footer></Footer>
+        <hr />
+        <Footer />
       </div>
     );
   }
