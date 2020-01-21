@@ -1,14 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ModalAbout from './Header/ModalAbout';
 import ModalContact from './Header/ModalContact';
 import ModalLoginOrRegistration from './Header/ModalLoginOrRegistration';
+import Logout from './Header/Logout';
+import ViewAllUser from './Header/ViewAllUser';
 
 const Header = () => (
   <nav className="navbar navbar-expand-lg nav-style">
     <div className="container">
-      <a className="navbar-brand" href="#">
+      <Link className="navbar-brand" to="/">
         bgShop
-      </a>
+      </Link>
       <div className="navbar-collapse collapse">
         <ul className="navbar-nav">
           <ModalAbout />
