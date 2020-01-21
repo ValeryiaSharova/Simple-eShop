@@ -56,4 +56,4 @@ Card.defaultProps = {
   description: '',
 };
 
-export default memo(Card); // pure component
+export default memo(Card);

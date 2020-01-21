@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Footer from '../../components/Footer';
+import Footer from '../../sharedComponents/Footer';
 import { tableOfUsers } from '../../store/DataUser';
 
 const Table = () => {
-  const [users, setUsers] = useState(tableOfUsers.reverse());
+  const [users, setUsers] = useState(tableOfUsers);
 
   return (
     <div className="container mt-3">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Info from '../../components/Information';
-import Footer from '../../components/Footer';
-import Card from '../../components/Card';
+import Info from '../../sharedComponents/Header/Information';
+import Footer from '../../sharedComponents/Footer';
+import Card from '../../sharedComponents/GoodCard';
 import { goodsData } from '../../store/DataGood';
 
 const Index = () => {
