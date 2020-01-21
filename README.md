@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Simple-eShop
+This project is a prototype of simple shop where users can buy board games.
 
 ## Available Scripts
 
