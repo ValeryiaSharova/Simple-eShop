@@ -2,7 +2,11 @@ import React, { memo } from 'react';
 import PropTypes from 'proptypes';
 
 const Card = props => {
-  const { isAdmin = false, isUser = false } = props;
+  const { deleteGood, isAdmin, isUser } = props;
+
+  const handleDelete = () => {
+    deleteGood(props.title);
+  };
 
   const chunkAdminButton = (
     <div className="text-center">
@@ -10,7 +14,7 @@ const Card = props => {
         Buy for {props.price}$
         <i className="fas fa-angle-right rounded-circle ml-1 style-circle" />
       </button>
-      <button className="btn btn-color btn-rounded my-1 mx-1">
+      <button onClick={handleDelete} className="btn btn-color btn-rounded my-1 mx-1">
         Delete
         <i className="fas fa-times rounded-circle ml-1 style-circle" />
       </button>
@@ -43,17 +47,21 @@ const Card = props => {
 };
 
 Card.propTypes = {
+  deleteGood: PropTypes.func,
   picture: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   tags: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  isAdmin: PropTypes.bool.isRequired,
-  isUser: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool,
+  isUser: PropTypes.bool,
 };
 
 Card.defaultProps = {
   description: '',
+  deleteGood: () => {},
+  isAdmin: false,
+  isUser: false,
 };
 
 export default memo(Card);

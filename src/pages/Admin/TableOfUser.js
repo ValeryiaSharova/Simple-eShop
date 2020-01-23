@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'proptypes';
 import Footer from '../../sharedComponents/Footer';
-import { tableOfUsers } from '../../store/DataUser';
 
-const Table = () => {
-  const [users, setUsers] = useState(tableOfUsers);
-
+const Table = props => {
+  const { users } = props;
   return (
     <div className="container mt-3">
       <h2>Page for admin</h2>
@@ -23,7 +22,7 @@ const Table = () => {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr>
+            <tr key={index}>
               <th>{index + 1}</th>
               <td>{user.name}</td>
               <td>{user.fname}</td>
@@ -43,6 +42,10 @@ const Table = () => {
       <Footer />
     </div>
   );
+};
+
+Table.propTypes = {
+  users: PropTypes.array.isRequired,
 };
 
 export default Table;
