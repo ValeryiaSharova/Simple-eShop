@@ -5,7 +5,7 @@ const Card = props => {
   const { deleteGood, isAdmin, isUser } = props;
 
   const handleDelete = () => {
-    deleteGood(props.title);
+    deleteGood(props.id);
   };
 
   const chunkAdminButton = (
@@ -55,6 +55,7 @@ Card.propTypes = {
   price: PropTypes.number.isRequired,
   isAdmin: PropTypes.bool,
   isUser: PropTypes.bool,
+  id: PropTypes.number.isRequired,
 };
 
 Card.defaultProps = {
