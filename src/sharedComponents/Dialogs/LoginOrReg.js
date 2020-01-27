@@ -35,8 +35,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-const LoginOrRegister = props => {
-  const { show, closeModal } = props;
+const LoginOrRegister = ({ onRequestClose, show }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -74,7 +73,7 @@ const LoginOrRegister = props => {
         </TabPanel>
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeModal} color="primary">
+        <Button onClick={onRequestClose} color="primary">
           Cancel
         </Button>
       </DialogActions>
@@ -84,7 +83,7 @@ const LoginOrRegister = props => {
 
 LoginOrRegister.propTypes = {
   show: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
 };
 
 export default LoginOrRegister;

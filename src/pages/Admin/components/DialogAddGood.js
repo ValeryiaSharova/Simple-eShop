@@ -6,8 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'proptypes';
 
-const AddGood = props => {
-  const { addGood, show, closeModal } = props;
+const AddGood = ({ onRequestClose, show, addGood }) => {
   const [titleGood, setTitle] = useState('');
   const [descriptionGood, setDescription] = useState('');
   const [priceGood, setPrice] = useState('');
@@ -23,6 +22,7 @@ const AddGood = props => {
       picture: pictureGood,
       tags: tagsGood,
     });
+    onRequestClose();
   };
 
   return (
@@ -111,7 +111,7 @@ const AddGood = props => {
         </div>
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeModal} color="primary">
+        <Button onClick={onRequestClose} color="primary">
           Close
         </Button>
       </DialogActions>
@@ -122,7 +122,7 @@ const AddGood = props => {
 AddGood.propTypes = {
   addGood: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
 };
 
 export default AddGood;

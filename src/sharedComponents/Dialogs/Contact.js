@@ -7,28 +7,24 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'proptypes';
 
-const Contact = props => {
-  const { show, closeModal } = props;
-
-  return (
-    <Dialog open={show}>
-      <DialogTitle aria-labelledby="customized-dialog-title">Contact</DialogTitle>
-      <DialogContent dividers>
-        <Typography gutterBottom>Developed by Valeryia Sharova</Typography>
-        <Typography gutterBottom>E-mail: gominzyplay@gmail.com</Typography>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={closeModal} color="primary">
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
-};
+const Contact = ({ onRequestClose, show }) => (
+  <Dialog open={show}>
+    <DialogTitle aria-labelledby="customized-dialog-title">Contact</DialogTitle>
+    <DialogContent dividers>
+      <Typography gutterBottom>Developed by Valeryia Sharova</Typography>
+      <Typography gutterBottom>E-mail: gominzyplay@gmail.com</Typography>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={onRequestClose} color="primary">
+        Close
+      </Button>
+    </DialogActions>
+  </Dialog>
+);
 
 Contact.propTypes = {
   show: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
 };
 
 export default Contact;
