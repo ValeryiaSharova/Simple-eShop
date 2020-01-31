@@ -6,27 +6,31 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'proptypes';
 
-const AddGood = ({ onRequestClose, show, addGood }) => {
-  const [titleGood, setTitle] = useState('');
-  const [descriptionGood, setDescription] = useState('');
-  const [priceGood, setPrice] = useState('');
-  const [pictureGood, setPicture] = useState('');
-  const [tagsGood, setTags] = useState('');
+const AddGood = ({ onRequestClose, addGood }) => {
+  const [goodNew, setGoodNew] = useState({
+    title: '',
+    description: '',
+    price: 0,
+    picture: '',
+    tags: '',
+  });
+
+  const handleAddGood = e => {
+    let { value } = e.target;
+    if (e.target.name === 'price') {
+      value = Number(value);
+    }
+    setGoodNew({ ...goodNew, [e.target.name]: value });
+  };
 
   const add = e => {
     e.preventDefault();
-    addGood({
-      title: titleGood,
-      description: descriptionGood,
-      price: priceGood,
-      picture: pictureGood,
-      tags: tagsGood,
-    });
+    addGood(goodNew);
     onRequestClose();
   };
 
   return (
-    <Dialog open={show}>
+    <Dialog open>
       <DialogTitle aria-labelledby="customized-dialog-title">Add a new game</DialogTitle>
       <DialogContent dividers>
         <div className="modal-body">
@@ -41,9 +45,7 @@ const AddGood = ({ onRequestClose, show, addGood }) => {
                   name="title"
                   required=""
                   aria-required="true"
-                  onChange={e => {
-                    setTitle(e.target.value);
-                  }}
+                  onChange={handleAddGood}
                 />
               </div>
               <div className="form-group">
@@ -54,9 +56,7 @@ const AddGood = ({ onRequestClose, show, addGood }) => {
                   name="description"
                   required=""
                   aria-required="true"
-                  onChange={e => {
-                    setDescription(e.target.value);
-                  }}
+                  onChange={handleAddGood}
                 />
               </div>
               <div className="form-group">
@@ -69,9 +69,7 @@ const AddGood = ({ onRequestClose, show, addGood }) => {
                   min="0"
                   required=""
                   aria-required="true"
-                  onChange={e => {
-                    setPrice(e.target.value);
-                  }}
+                  onChange={handleAddGood}
                 />
               </div>
               <div className="form-group">
@@ -83,9 +81,7 @@ const AddGood = ({ onRequestClose, show, addGood }) => {
                   name="picture"
                   required=""
                   aria-required="true"
-                  onChange={e => {
-                    setPicture(e.target.value);
-                  }}
+                  onChange={handleAddGood}
                 />
               </div>
               <div className="form-group">
@@ -96,9 +92,7 @@ const AddGood = ({ onRequestClose, show, addGood }) => {
                   name="tags"
                   required=""
                   aria-required="true"
-                  onChange={e => {
-                    setTags(e.target.value);
-                  }}
+                  onChange={handleAddGood}
                 />
               </div>
               <div className="form-group">
@@ -121,7 +115,6 @@ const AddGood = ({ onRequestClose, show, addGood }) => {
 
 AddGood.propTypes = {
   addGood: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
 };
 
