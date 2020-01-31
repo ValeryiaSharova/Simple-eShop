@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
-import IndexForAdmin from '../pages/Admin/IndexForAdmin';
+import Page from '../pages/indexPage';
 import * as actions from '../redux/actions/goodsAction';
 
 const mapStateToProps = state => ({
   goods: state.goods.goodsData,
+  currentUser: state.users.currentUser,
 });
 
-export default connect(mapStateToProps, actions)(IndexForAdmin);
+export default connect(mapStateToProps, actions)(Page);
