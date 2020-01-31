@@ -7,8 +7,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'proptypes';
 
-const About = ({ onRequestClose, show }) => (
-  <Dialog open={show}>
+const About = ({ onRequestClose }) => (
+  <Dialog open>
     <DialogTitle aria-labelledby="customized-dialog-title">About</DialogTitle>
     <DialogContent dividers>
       <Typography gutterBottom>
@@ -27,7 +27,6 @@ const About = ({ onRequestClose, show }) => (
 );
 
 About.propTypes = {
-  show: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
 };
 

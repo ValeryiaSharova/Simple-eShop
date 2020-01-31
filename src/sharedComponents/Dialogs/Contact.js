@@ -7,8 +7,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'proptypes';
 
-const Contact = ({ onRequestClose, show }) => (
-  <Dialog open={show}>
+const Contact = ({ onRequestClose }) => (
+  <Dialog open>
     <DialogTitle aria-labelledby="customized-dialog-title">Contact</DialogTitle>
     <DialogContent dividers>
       <Typography gutterBottom>Developed by Valeryia Sharova</Typography>
@@ -23,7 +23,6 @@ const Contact = ({ onRequestClose, show }) => (
 );
 
 Contact.propTypes = {
-  show: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
 };
 
