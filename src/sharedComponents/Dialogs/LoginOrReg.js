@@ -35,7 +35,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-const LoginOrRegister = ({ onRequestClose, show }) => {
+const LoginOrRegister = ({ onRequestClose, addUser, login }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -50,7 +50,7 @@ const LoginOrRegister = ({ onRequestClose, show }) => {
   }
 
   return (
-    <Dialog open={show}>
+    <Dialog open>
       <DialogContent dividers>
         <AppBar position="static" color="default">
           <Tabs
@@ -66,10 +66,10 @@ const LoginOrRegister = ({ onRequestClose, show }) => {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <Login />
+          <Login login={login} onRequestClose={onRequestClose} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Registration />
+          <Registration addUser={addUser} onRequestClose={onRequestClose} />
         </TabPanel>
       </DialogContent>
       <DialogActions>
@@ -82,8 +82,9 @@ const LoginOrRegister = ({ onRequestClose, show }) => {
 };
 
 LoginOrRegister.propTypes = {
-  show: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
+  addUser: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export default LoginOrRegister;

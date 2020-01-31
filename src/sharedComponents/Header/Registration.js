@@ -1,58 +1,91 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'proptypes';
 
-const Registration = () => (
-  <div className="tab-pane" id="register" role="tabpanel">
-    <div className="modal-body">
-      <form id="add-new-user">
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="input-fname">First name:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="input-fname"
-              name="input-fname"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="input-lname">Last name:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="input-lname"
-              name="input-lname"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="input-email">E-mail:</label>
-            <input
-              type="email"
-              className="form-control"
-              id="input-email"
-              name="input-email"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="input-pass">Password:</label>
-            <input
-              type="password"
-              className="form-control"
-              id="input-pass"
-              name="input-pass"
-              minLength="5"
-              required
-            />
-          </div>
-          <div className="text-center mt-2">
-            <input type="submit" value="Create account" className="btn btn-modal" />
-          </div>
-        </fieldset>
-      </form>
+const Registration = props => {
+  const { addUser, onRequestClose } = props;
+
+  const [newUser, setNewUser] = useState({
+    name: '',
+    fname: '',
+    mail: '',
+    pass: '',
+    role: 'user',
+    deleteRequest: false,
+  });
+
+  const handleAddUser = e => {
+    setNewUser({ ...newUser, [e.target.name]: e.target.value });
+  };
+
+  const add = e => {
+    e.preventDefault();
+    addUser(newUser);
+    onRequestClose();
+  };
+
+  return (
+    <div className="tab-pane" id="register" role="tabpanel">
+      <div className="modal-body">
+        <form id="add-new-user">
+          <fieldset>
+            <div className="form-group">
+              <label htmlFor="name">First name:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="input-name"
+                name="name"
+                required
+                onChange={handleAddUser}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="fname">Last name:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="input-fname"
+                name="fname"
+                required
+                onChange={handleAddUser}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="mail">E-mail:</label>
+              <input
+                type="email"
+                className="form-control"
+                id="input-email"
+                name="mail"
+                required
+                onChange={handleAddUser}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="pass">Password:</label>
+              <input
+                type="password"
+                className="form-control"
+                id="input-pass"
+                name="pass"
+                minLength="5"
+                required
+                onChange={handleAddUser}
+              />
+            </div>
+            <div className="text-center mt-2">
+              <input type="submit" value="Create account" onClick={add} className="btn btn-modal" />
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
+Registration.propTypes = {
+  addUser: PropTypes.func.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
+};
 
 export default Registration;

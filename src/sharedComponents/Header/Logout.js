@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'proptypes';
 
-const Logout = () => (
+const Logout = ({ logout }) => (
   <li className="nav-item mr-2">
-    <Link to="/">
-      <button type="button" className="btn btn-nav mt-1" id="logout-button">
-        Logout
-      </button>
-    </Link>
+    <button onClick={logout} type="button" className="btn btn-nav mt-1" id="logout-button">
+      Logout
+    </button>
   </li>
 );
+
+Logout.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
 
 export default Logout;

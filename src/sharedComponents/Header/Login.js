@@ -1,8 +1,23 @@
 import React, { useState } from 'react';
+import PropTypes from 'proptypes';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+const Login = props => {
+  const { login, onRequestClose } = props;
+
+  const [loginUser, setLoginUser] = useState({
+    mail: '',
+    pass: '',
+  });
+
+  const handleLogin = e => {
+    setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
+  };
+
+  const logUser = e => {
+    e.preventDefault();
+    login(loginUser);
+    onRequestClose();
+  };
 
   return (
     <div className="tab-pane active" id="login" role="tabpanel">
@@ -14,9 +29,8 @@ const Login = () => {
               type="email"
               className="form-control"
               id="input-login-email"
-              onChange={e => {
-                setEmail(e.target.value);
-              }}
+              name="mail"
+              onChange={handleLogin}
             />
           </div>
           <div className="form-group">
@@ -25,18 +39,22 @@ const Login = () => {
               type="password"
               className="form-control"
               id="input-login-pass"
-              onChange={e => {
-                setPass(e.target.value);
-              }}
+              name="pass"
+              onChange={handleLogin}
             />
           </div>
           <div className="text-center mt-2">
-            <input type="submit" value="Login" className="btn btn-modal" />
+            <input onClick={logUser} type="submit" value="Login" className="btn btn-modal" />
           </div>
         </form>
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
 };
 
 export default Login;
