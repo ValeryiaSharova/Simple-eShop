@@ -3,7 +3,12 @@ import PropTypes from 'proptypes';
 import Footer from '../../sharedComponents/Footer';
 
 const Table = props => {
-  const { users } = props;
+  const { users, deleteUser } = props;
+
+  const handleDelete = mail => () => {
+    deleteUser(mail);
+  };
+
   return (
     <div className="container mt-3">
       <h2>Page for admin</h2>
@@ -30,7 +35,12 @@ const Table = props => {
               <td>{user.role}</td>
               <td>{user.deleteRequest.toString()}</td>
               <td>
-                <button className="btn btn-color" type="button" name="user-remove-button">
+                <button
+                  onClick={handleDelete(user.mail)}
+                  className="btn btn-color"
+                  type="button"
+                  name="user-remove-button"
+                >
                   Remove
                 </button>
               </td>
@@ -45,7 +55,8 @@ const Table = props => {
 };
 
 Table.propTypes = {
-  users: PropTypes.array.isRequired,
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteUser: PropTypes.func.isRequired,
 };
 
 export default Table;
