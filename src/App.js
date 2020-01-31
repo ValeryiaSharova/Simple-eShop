@@ -1,26 +1,44 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from './sharedComponents/Header';
-import Anon from './containers/anonPageContainer';
-import User from './containers/userPageContainer';
-import Admin from './containers/adminPageContainer';
+import { useSelector } from 'react-redux';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Header from './containers/headerContainer';
 import Table from './containers/tableContainer';
+import Page from './containers/indexPageContainer';
 import { ModalProvider } from './context/ModalContext';
 import ModalRoot from './context/ModalRoot';
 
-const App = () => (
-  <BrowserRouter>
-    <ModalProvider>
-      <ModalRoot />
-      <Header />
-      <Switch>
-        <Route path="/" exact component={Anon} />
-        <Route path="/user" exact component={User} />
-        <Route path="/admin" exact component={Admin} />
-        <Route path="/table" exact component={Table} />
-      </Switch>
-    </ModalProvider>
-  </BrowserRouter>
-);
-
+const App = () => {
+  const currentUserState = useSelector(state => state.users.currentUser);
+  return (
+    <BrowserRouter>
+      <ModalProvider>
+        <ModalRoot />
+        <Header />
+        <Switch>
+          {!currentUserState.isAuth ? (
+            <div>
+              <Route path="/page" exact component={Page} />
+              <Redirect to="/page" />
+            </div>
+          ) : (
+            <div>
+              {currentUserState.role === 'admin' ? (
+                <div>
+                  <Route path="/page" exact component={Page} />
+                  <Route path="/table" exact component={Table} />
+                  <Redirect to="/page" />
+                </div>
+              ) : (
+                <div>
+                  <Route path="/page" exact component={Page} />
+                  <Redirect to="/page" />
+                </div>
+              )}
+            </div>
+          )}
+        </Switch>
+      </ModalProvider>
+    </BrowserRouter>
+  );
+};
 export default App;

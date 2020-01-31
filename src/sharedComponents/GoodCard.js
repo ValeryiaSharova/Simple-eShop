@@ -2,7 +2,16 @@ import React, { memo } from 'react';
 import PropTypes from 'proptypes';
 
 const Card = props => {
-  const { deleteGood, isAdmin, isUser } = props;
+  const { deleteGood, role } = props;
+
+  let isAdmin = false;
+  let isUser = false;
+
+  if (role === 'admin') {
+    isAdmin = true;
+  } else if (role === 'user') {
+    isUser = true;
+  }
 
   const handleDelete = () => {
     deleteGood(props.id);
@@ -53,16 +62,14 @@ Card.propTypes = {
   description: PropTypes.string,
   tags: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  isAdmin: PropTypes.bool,
-  isUser: PropTypes.bool,
   id: PropTypes.number.isRequired,
+  role: PropTypes.string,
 };
 
 Card.defaultProps = {
   description: '',
   deleteGood: () => {},
-  isAdmin: false,
-  isUser: false,
+  role: 'anon',
 };
 
 export default memo(Card);
