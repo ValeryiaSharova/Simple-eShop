@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'proptypes';
-import Footer from '../../sharedComponents/Footer';
+import Footer from '../../sharedComponents/Footer/Footer';
 
 const Table = props => {
   const { users, deleteUser } = props;

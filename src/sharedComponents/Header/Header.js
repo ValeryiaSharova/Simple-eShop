@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
-import { ModalConsumer } from '../context/ModalContext';
-import About from './Dialogs/About';
-import Contact from './Dialogs/Contact';
-import LoginOrReg from './Dialogs/LoginOrReg';
-import Logout from './Header/Logout';
-import ViewAllUser from './Header/ViewAllUser';
+import { ModalConsumer } from '../../context/ModalContext';
+import About from '../Dialogs/About';
+import Contact from '../Dialogs/Contact';
+import LoginOrReg from '../Dialogs/LoginOrReg';
+import Logout from './Logout';
+import ViewAllUser from './ViewAllUser';
 
 const Header = props => {
   const { addUser, login, logout, currentUser } = props;

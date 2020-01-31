@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Page from '../pages/indexPage';
+import Page from './IndexPage';
 import * as actions from '../redux/actions/goodsAction';
 
 const mapStateToProps = state => ({

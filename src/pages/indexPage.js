@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'proptypes';
 import { ModalConsumer } from '../context/ModalContext';
 import Info from '../sharedComponents/Header/Information';
-import Footer from '../sharedComponents/Footer';
-import Card from '../sharedComponents/GoodCard';
+import Footer from '../sharedComponents/Footer/Footer';
+import Card from '../sharedComponents/GoodCard/GoodCard';
 import AddGood from './Admin/components/DialogAddGood';
 
 const Page = props => {

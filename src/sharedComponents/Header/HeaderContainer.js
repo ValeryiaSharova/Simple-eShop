@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Header from '../sharedComponents/Header';
-import * as actions from '../redux/actions/userAction';
+import Header from './Header';
+import * as actions from '../../redux/actions/userAction';
 
 const mapStateToProps = state => ({
   users: state.users.usersData,
