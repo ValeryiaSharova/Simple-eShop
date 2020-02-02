@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Header from './containers/headerContainer';
-import Table from './containers/tableContainer';
-import Page from './containers/indexPageContainer';
+import Header from './sharedComponents/Header/HeaderContainer';
+import Table from './pages/Admin/TableContainer';
+import Page from './pages/IndexPageContainer';
 import { ModalProvider } from './context/ModalContext';
 import ModalRoot from './context/ModalRoot';
 
