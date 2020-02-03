@@ -21,7 +21,6 @@ const Table = props => {
             <th>Last Name</th>
             <th>Email</th>
             <th>Role</th>
-            <th>Remove request</th>
             <th>Remove</th>
           </tr>
         </thead>
@@ -33,17 +32,18 @@ const Table = props => {
               <td>{user.fname}</td>
               <td>{user.mail}</td>
               <td>{user.role}</td>
-              <td>{user.deleteRequest.toString()}</td>
-              <td>
-                <button
-                  onClick={handleDelete(user.mail)}
-                  className="btn btn-color"
-                  type="button"
-                  name="user-remove-button"
-                >
-                  Remove
-                </button>
-              </td>
+              {user.deleteRequest ? (
+                <td>
+                  <button
+                    onClick={handleDelete(user.mail)}
+                    className="btn btn-color"
+                    type="button"
+                    name="user-remove-button"
+                  >
+                    Remove
+                  </button>
+                </td>
+              ) : null}
             </tr>
           ))}
         </tbody>
