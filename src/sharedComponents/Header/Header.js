@@ -15,7 +15,7 @@ const Header = props => {
   return (
     <nav className="navbar navbar-expand-lg nav-style">
       <div className="container">
-        <Link className="navbar-brand" to="/page">
+        <Link className="navbar-brand" to="/">
           bgShop
         </Link>
         <ModalConsumer>
