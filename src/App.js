@@ -4,9 +4,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './sharedComponents/Header/HeaderContainer';
 import Table from './pages/Admin/TableContainer';
 import Page from './pages/IndexPageContainer';
+import Account from './pages/User/UserAccontContainer';
 import { ModalProvider } from './context/ModalContext';
 import ModalRoot from './context/ModalRoot';
-import PrivateRoute from './sharedComponents/PrivateRoute/PrivateRoute';
+import PrivateRouteAdmin from './sharedComponents/PrivateRoute/PrivateRouteAdmin';
+import PrivateRouteUser from './sharedComponents/PrivateRoute/PrivateRouteUser';
 import store from './redux/store';
 
 const App = () => (
@@ -17,7 +19,8 @@ const App = () => (
         <Header />
         <Switch>
           <Route path="/" exact component={Page} />
-          <PrivateRoute path="/table" exact component={Table} />
+          <PrivateRouteUser path="/account" exact component={Account} />
+          <PrivateRouteAdmin path="/table" exact component={Table} />
         </Switch>
       </ModalProvider>
     </BrowserRouter>

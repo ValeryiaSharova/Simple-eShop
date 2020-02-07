@@ -7,13 +7,14 @@ import Contact from '../Dialogs/Contact';
 import LoginOrReg from '../Dialogs/LoginOrReg';
 import Logout from './Logout';
 import ViewAllUser from './ViewAllUser';
+import Account from './Account';
 
 const Header = props => {
   const { addUser, login, logout, currentUser } = props;
   const { role } = currentUser;
 
   return (
-    <nav className="navbar navbar-expand-lg nav-style">
+    <nav className="navbar nav-style navbar-expand-sm">
       <div className="container">
         <Link className="navbar-brand" to="/">
           bgShop
@@ -43,6 +44,7 @@ const Header = props => {
               </ul>
               {role === 'user' ? (
                 <ul className="navbar-nav navbar-right ml-auto">
+                  <Account />
                   <Logout logout={logout} />
                 </ul>
               ) : (
@@ -50,7 +52,6 @@ const Header = props => {
                   {role === 'admin' ? (
                     <ul className="navbar-nav navbar-right ml-auto">
                       <ViewAllUser />
-
                       <Logout logout={logout} />
                     </ul>
                   ) : (

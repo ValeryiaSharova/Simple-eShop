@@ -1,4 +1,4 @@
-import { DELETE_USER, ADD_USER, LOGIN, LOGOUT } from '../constants';
+import { DELETE_USER, ADD_USER, LOGIN, LOGOUT, CHANGE_NAME, REQUEST } from '../constants';
 
 const initialState = {
   usersData: [
@@ -59,7 +59,14 @@ const reducer = (state = initialState, action) => {
       users.push(action.payload);
       const newState = { ...state };
       newState.usersData = users;
-      newState.currentUser = { isAuth: true, mail: action.payload.mail, role: action.payload.role };
+      newState.currentUser = {
+        isAuth: true,
+        name: action.payload.name,
+        fname: action.payload.fname,
+        mail: action.payload.mail,
+        role: action.payload.role,
+        deleteRequest: action.payload.deleteRequest,
+      };
       return newState;
     }
     case LOGIN: {
@@ -68,13 +75,15 @@ const reducer = (state = initialState, action) => {
       const users = [...state.usersData];
       const { mail, pass } = action.payload;
       const userInfo = users.find(user => user.mail === mail);
-
       if (userInfo) {
         if (userInfo.pass === pass) {
           currentUser = {
             isAuth: true,
+            name: userInfo.name,
+            fname: userInfo.fname,
             mail: userInfo.mail,
             role: userInfo.role,
+            deleteRequest: userInfo.deleteRequest,
           };
         } else {
           alert('error pass');
@@ -89,6 +98,29 @@ const reducer = (state = initialState, action) => {
     case LOGOUT: {
       const newState = { ...state };
       newState.currentUser = initialState.currentUser;
+      return newState;
+    }
+    case CHANGE_NAME: {
+      const users = [...state.usersData];
+      const { name, fname, mail } = action.payload;
+      const userInfo = users.find(user => user.mail === mail);
+      userInfo.name = name;
+      userInfo.fname = fname;
+      const newState = { ...state };
+      const { currentUser } = state;
+      newState.currentUser = { ...currentUser, ...action.payload };
+      newState.usersData = users;
+      return newState;
+    }
+    case REQUEST: {
+      const users = [...state.usersData];
+      const mail = action.payload;
+      const userInfo = users.find(user => user.mail === mail);
+      userInfo.deleteRequest = true;
+      const newState = { ...state };
+      newState.usersData = users;
+      const { currentUser } = state;
+      newState.currentUser = { ...currentUser, deleteRequest: true };
       return newState;
     }
     default:
