@@ -7,14 +7,15 @@ import Card from '../sharedComponents/GoodCard/GoodCard';
 import AddGood from './Admin/components/DialogAddGood';
 
 const Page = props => {
-  const { goods, deleteGood, addGood, currentUser, editGood, loadGoods } = props;
+  const { goods, deleteGood, addGood, currentUser, editGood, loadGoods, loadUsers } = props;
   const { role } = currentUser;
 
   useEffect(() => {
     if (!goods.length) {
       loadGoods();
+      loadUsers();
     }
-  }, [goods.length, loadGoods]);
+  }, [goods.length, loadGoods, loadUsers]);
 
   return (
     <div className="container mt-3">
@@ -61,6 +62,7 @@ Page.propTypes = {
   addGood: PropTypes.func.isRequired,
   editGood: PropTypes.func.isRequired,
   loadGoods: PropTypes.func.isRequired,
+  loadUsers: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
 };
 

@@ -1,48 +1,15 @@
-import { DELETE_USER, ADD_USER, LOGIN, LOGOUT, CHANGE_NAME, REQUEST } from '../constants';
+import {
+  DELETE_USER,
+  ADD_USER,
+  LOGIN,
+  LOGOUT,
+  CHANGE_NAME,
+  REQUEST,
+  SET_USERS,
+} from '../constants';
 
 const initialState = {
-  usersData: [
-    {
-      name: 'Aller',
-      fname: 'Forst',
-      mail: 'goAller@gmail.com',
-      pass: 'admin',
-      role: 'admin',
-      deleteRequest: false,
-    },
-    {
-      name: 'Anastasia',
-      fname: 'Novikova',
-      mail: 'Nov@mail.ru',
-      pass: '11111',
-      role: 'user',
-      deleteRequest: true,
-    },
-    {
-      name: 'Valeryia',
-      fname: 'Nemankova',
-      mail: 'Neman@gmail.com',
-      pass: '22222',
-      role: 'user',
-      deleteRequest: false,
-    },
-    {
-      name: 'Igor',
-      fname: 'Leonov',
-      mail: 'Xan@yandex.com',
-      pass: '33333',
-      role: 'user',
-      deleteRequest: false,
-    },
-    {
-      name: 'Pavel',
-      fname: 'Zinkevich',
-      mail: 'Pavel@gmail.com',
-      pass: '44444',
-      role: 'user',
-      deleteRequest: true,
-    },
-  ],
+  usersData: [],
   currentUser: { isAuth: false },
 };
 const reducer = (state = initialState, action) => {
@@ -91,7 +58,6 @@ const reducer = (state = initialState, action) => {
       } else {
         alert('error email');
       }
-
       newState.currentUser = currentUser;
       return newState;
     }
@@ -122,6 +88,9 @@ const reducer = (state = initialState, action) => {
       const { currentUser } = state;
       newState.currentUser = { ...currentUser, deleteRequest: true };
       return newState;
+    }
+    case SET_USERS: {
+      return { ...state, usersData: [...state.usersData, ...action.payload.users] };
     }
     default:
       return state;

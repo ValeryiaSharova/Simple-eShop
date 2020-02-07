@@ -1,10 +1,19 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Page from './IndexPage';
-import * as actions from '../redux/actions/goodsAction';
+import * as actionsGood from '../redux/actions/goodsAction';
+import * as actionsUser from '../redux/actions/userAction';
 
 const mapStateToProps = state => ({
   goods: state.goods.goodsData,
   currentUser: state.users.currentUser,
 });
 
-export default connect(mapStateToProps, actions)(Page);
+const mapDispatchToProps = dispatch => {
+  const { deleteGood, addGood, editGood, loadGoods } = bindActionCreators(actionsGood, dispatch);
+  const { loadUsers } = bindActionCreators(actionsUser, dispatch);
+
+  return { deleteGood, addGood, editGood, loadGoods, loadUsers };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
