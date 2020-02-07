@@ -8,7 +8,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_GOOD: {
       const goods = [...state.goodsData];
-      goods.unshift(action.payload);
+      goods.unshift(action.payload.good);
       goods[0].id = goods.length;
       const newState = { ...state };
       newState.goodsData = goods;
@@ -16,14 +16,14 @@ const reducer = (state = initialState, action) => {
     }
     case DELETE_GOOD: {
       const goods = [...state.goodsData];
-      const newGoods = goods.filter(good => good.id !== action.payload);
+      const newGoods = goods.filter(good => good.id !== action.payload.id);
       const newState = { ...state };
       newState.goodsData = newGoods;
       return newState;
     }
     case EDIT_GOOD: {
       const goods = [...state.goodsData];
-      const newGood = action.payload;
+      const newGood = action.payload.good;
       const goodId = goods.find(good => good.id === newGood.id).id;
       goods[goods.length - goodId] = { ...goods[goodId], ...newGood };
       const newState = { ...state };

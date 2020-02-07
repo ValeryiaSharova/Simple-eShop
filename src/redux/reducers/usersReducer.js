@@ -16,23 +16,25 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_USER: {
       const users = state.usersData;
-      const newUsers = users.filter(user => user.mail !== action.payload || !user.deleteRequest);
+      const newUsers = users.filter(
+        user => user.mail !== action.payload.mail || !user.deleteRequest
+      );
       const newState = { ...state };
       newState.usersData = newUsers;
       return newState;
     }
     case ADD_USER: {
       const users = [...state.usersData];
-      users.push(action.payload);
+      users.push(action.payload.user);
       const newState = { ...state };
       newState.usersData = users;
       newState.currentUser = {
         isAuth: true,
-        name: action.payload.name,
-        fname: action.payload.fname,
-        mail: action.payload.mail,
-        role: action.payload.role,
-        deleteRequest: action.payload.deleteRequest,
+        name: action.payload.user.name,
+        fname: action.payload.user.fname,
+        mail: action.payload.user.mail,
+        role: action.payload.user.role,
+        deleteRequest: action.payload.user.deleteRequest,
       };
       return newState;
     }
@@ -40,7 +42,7 @@ const reducer = (state = initialState, action) => {
       const newState = { ...state };
       let { currentUser } = state;
       const users = [...state.usersData];
-      const { mail, pass } = action.payload;
+      const { mail, pass } = action.payload.user;
       const userInfo = users.find(user => user.mail === mail);
       if (userInfo) {
         if (userInfo.pass === pass) {
@@ -68,19 +70,19 @@ const reducer = (state = initialState, action) => {
     }
     case CHANGE_NAME: {
       const users = [...state.usersData];
-      const { name, fname, mail } = action.payload;
+      const { name, fname, mail } = action.payload.user;
       const userInfo = users.find(user => user.mail === mail);
       userInfo.name = name;
       userInfo.fname = fname;
       const newState = { ...state };
       const { currentUser } = state;
-      newState.currentUser = { ...currentUser, ...action.payload };
+      newState.currentUser = { ...currentUser, ...action.payload.user };
       newState.usersData = users;
       return newState;
     }
     case REQUEST: {
       const users = [...state.usersData];
-      const mail = action.payload;
+      const { mail } = action.payload;
       const userInfo = users.find(user => user.mail === mail);
       userInfo.deleteRequest = true;
       const newState = { ...state };

@@ -1,10 +1,10 @@
 import { DELETE_GOOD, ADD_GOOD, EDIT_GOOD, SET_GOODS } from '../constants';
 
-export const deleteGood = id => ({ type: DELETE_GOOD, payload: id });
+export const deleteGood = id => ({ type: DELETE_GOOD, payload: { id } });
 
-export const addGood = object => ({ type: ADD_GOOD, payload: object });
+export const addGood = good => ({ type: ADD_GOOD, payload: { good } });
 
-export const editGood = object => ({ type: EDIT_GOOD, payload: object });
+export const editGood = good => ({ type: EDIT_GOOD, payload: { good } });
 
 export const setGoods = goods => ({ type: SET_GOODS, payload: { goods } });
 
