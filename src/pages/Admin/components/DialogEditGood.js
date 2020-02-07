@@ -95,7 +95,7 @@ const EditGood = ({ onRequestClose, editGood, good }) => {
                 />
               </div>
               <div className="form-group">
-                <button className="btn btn-modal" onClick={edit}>
+                <button type="button" className="btn btn-modal" onClick={edit}>
                   Save
                 </button>
               </div>

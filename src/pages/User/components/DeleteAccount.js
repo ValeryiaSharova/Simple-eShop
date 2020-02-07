@@ -9,7 +9,7 @@ const DeleteAccount = ({ requestForDelete, currentUser }) => {
   return (
     <div className="text-center delete-account">
       <h3>Do you want to delete you account?</h3>
-      <button className="btn btn-modal mt-2 mb-2" onClick={request}>
+      <button type="button" className="btn btn-modal mt-2 mb-2" onClick={request}>
         Delete
       </button>
     </div>

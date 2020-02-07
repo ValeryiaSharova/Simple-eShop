@@ -37,7 +37,7 @@ const Card = props => {
           </button>
         )}
       </ModalConsumer>
-      <button onClick={handleDelete} className="btn btn-color btn-rounded my-1 mx-1">
+      <button type="button" onClick={handleDelete} className="btn btn-color btn-rounded my-1 mx-1">
         Delete
         <i className="fas fa-times rounded-circle ml-1 style-circle" />
       </button>
@@ -46,7 +46,7 @@ const Card = props => {
 
   const chunkBuyButton = (
     <div className="text-center">
-      <button className="btn btn-color btn-rounded my-1 mx-1">
+      <button type="button" className="btn btn-color btn-rounded my-1 mx-1">
         Buy for {price}$
         <i className="fas fa-angle-right rounded-circle ml-1 style-circle" />
       </button>

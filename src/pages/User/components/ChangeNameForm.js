@@ -40,11 +40,13 @@ const ChangeNameForm = ({ changeName, currentUser }) => {
       </div>
       {!currentUser.deleteRequest ? (
         <div className="form-group text-center mt-2">
-          <button className="btn btn-modal">Change</button>
+          <button type="button" className="btn btn-modal">
+            Change
+          </button>
         </div>
       ) : (
         <div className="form-group text-center mt-2">
-          <button className="btn btn-modal" disabled>
+          <button type="button" className="btn btn-modal" disabled>
             Change
           </button>
         </div>

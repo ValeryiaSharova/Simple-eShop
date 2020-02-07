@@ -8,6 +8,7 @@ import PropTypes from 'proptypes';
 
 const AddGood = ({ onRequestClose, addGood }) => {
   const [goodNew, setGoodNew] = useState({
+    id: 0,
     title: '',
     description: '',
     price: 0,
@@ -96,7 +97,7 @@ const AddGood = ({ onRequestClose, addGood }) => {
                 />
               </div>
               <div className="form-group">
-                <button className="btn btn-modal" onClick={add}>
+                <button className="btn btn-modal" onClick={add} type="button">
                   Create
                 </button>
               </div>
