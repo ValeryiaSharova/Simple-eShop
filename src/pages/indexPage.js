@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'proptypes';
 import { ModalConsumer } from '../context/ModalContext';
-import Info from '../sharedComponents/Header/Information';
+import Info from '../sharedComponents/Information/Information';
 import Footer from '../sharedComponents/Footer/Footer';
 import Card from '../sharedComponents/GoodCard/GoodCard';
 import AddGood from './Admin/components/DialogAddGood';

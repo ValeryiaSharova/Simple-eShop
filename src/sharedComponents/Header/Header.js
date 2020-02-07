@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 import { ModalConsumer } from '../../context/ModalContext';
-import About from '../Dialogs/About';
-import Contact from '../Dialogs/Contact';
-import LoginOrReg from '../Dialogs/LoginOrReg';
-import Logout from './Logout';
-import ViewAllUser from './ViewAllUser';
-import Account from './Account';
+import About from '../Dialogs/About/About';
+import Contact from '../Dialogs/Contact/Contact';
+import LoginOrReg from '../Dialogs/LoginOrReg/LoginOrReg';
+import LogoutButton from './LogoutButton';
+import ViewAllUserButton from './ViewAllUserButton';
+import AccountButton from './AccountButton';
 
 const Header = props => {
   const { addUser, login, logout, currentUser } = props;
@@ -44,15 +44,23 @@ const Header = props => {
               </ul>
               {role === 'user' ? (
                 <ul className="navbar-nav navbar-right ml-auto">
-                  <Account />
-                  <Logout logout={logout} />
+                  <li className="nav-item mr-2">
+                    <AccountButton />
+                  </li>
+                  <li className="nav-item mr-2">
+                    <LogoutButton logout={logout} />
+                  </li>
                 </ul>
               ) : (
                 <div className="navbar-nav navbar-right ml-auto">
                   {role === 'admin' ? (
                     <ul className="navbar-nav navbar-right ml-auto">
-                      <ViewAllUser />
-                      <Logout logout={logout} />
+                      <li className="nav-item mr-2">
+                        <ViewAllUserButton />
+                      </li>
+                      <li className="nav-item mr-2">
+                        <LogoutButton logout={logout} />
+                      </li>
                     </ul>
                   ) : (
                     <ul className="navbar-nav navbar-right ml-auto">
