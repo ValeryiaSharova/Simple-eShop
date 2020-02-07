@@ -1,4 +1,4 @@
-import { DELETE_GOOD, ADD_GOOD, EDIT_GOOD } from '../constants';
+import { DELETE_GOOD, ADD_GOOD, EDIT_GOOD, SET_GOODS } from '../constants';
 
 const initialState = {
   goodsData: [],
@@ -29,6 +29,9 @@ const reducer = (state = initialState, action) => {
       const newState = { ...state };
       newState.goodsData = goods;
       return newState;
+    }
+    case SET_GOODS: {
+      return { ...state, goodsData: [...state.goodsData, ...action.payload.goods] };
     }
     default:
       return state;

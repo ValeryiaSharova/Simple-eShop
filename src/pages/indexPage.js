@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'proptypes';
 import { ModalConsumer } from '../context/ModalContext';
 import Info from '../sharedComponents/Header/Information';
@@ -7,8 +7,14 @@ import Card from '../sharedComponents/GoodCard/GoodCard';
 import AddGood from './Admin/components/DialogAddGood';
 
 const Page = props => {
-  const { goods, deleteGood, addGood, currentUser, editGood } = props;
+  const { goods, deleteGood, addGood, currentUser, editGood, loadGoods } = props;
   const { role } = currentUser;
+
+  useEffect(() => {
+    if (!goods.length) {
+      loadGoods();
+    }
+  }, [goods.length, loadGoods]);
 
   return (
     <div className="container mt-3">
@@ -54,6 +60,7 @@ Page.propTypes = {
   deleteGood: PropTypes.func.isRequired,
   addGood: PropTypes.func.isRequired,
   editGood: PropTypes.func.isRequired,
+  loadGoods: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
 };
 
