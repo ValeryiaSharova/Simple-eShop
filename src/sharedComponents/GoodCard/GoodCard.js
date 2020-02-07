@@ -1,28 +1,42 @@
 import React, { memo } from 'react';
 import PropTypes from 'proptypes';
+import { ModalConsumer } from '../../context/ModalContext';
+import EditGood from '../../pages/Admin/components/DialogEditGood';
 
 const Card = props => {
-  const { deleteGood, role } = props;
+  const { deleteGood, role, editGood } = props;
+  const { id, title, description, price, picture, tags } = props;
 
-  let isAdmin = false;
-  let isUser = false;
+  const good = {
+    id,
+    title,
+    description,
+    price,
+    picture,
+    tags,
+  };
 
-  if (role === 'admin') {
-    isAdmin = true;
-  } else if (role === 'user') {
-    isUser = true;
-  }
+  const isAdmin = role === 'admin';
+  const isUser = role === 'user';
 
   const handleDelete = () => {
-    deleteGood(props.id);
+    deleteGood(id);
   };
 
   const chunkAdminButton = (
     <div className="text-center">
-      <button className="btn btn-color btn-rounded my-1 mx-1">
-        Buy for {props.price}$
-        <i className="fas fa-angle-right rounded-circle ml-1 style-circle" />
-      </button>
+      <ModalConsumer>
+        {({ showModal }) => (
+          <button
+            type="button"
+            className="btn btn-color btn-rounded my-1 mx-1"
+            onClick={() => showModal(EditGood, { editGood, good })}
+          >
+            Edit
+            <i className="fas fa-angle-right rounded-circle ml-1 style-circle" />
+          </button>
+        )}
+      </ModalConsumer>
       <button onClick={handleDelete} className="btn btn-color btn-rounded my-1 mx-1">
         Delete
         <i className="fas fa-times rounded-circle ml-1 style-circle" />
@@ -33,7 +47,7 @@ const Card = props => {
   const chunkBuyButton = (
     <div className="text-center">
       <button className="btn btn-color btn-rounded my-1 mx-1">
-        Buy for {props.price}$
+        Buy for {price}$
         <i className="fas fa-angle-right rounded-circle ml-1 style-circle" />
       </button>
     </div>
@@ -41,12 +55,12 @@ const Card = props => {
 
   return (
     <div className="card box-shadow">
-      <img className="card-img-top" src={props.picture} alt={props.title} />
+      <img className="card-img-top" src={picture} alt={title} />
       <div className="card-body">
-        <h5 className="card-title text-center">{props.title}</h5>
-        <p className="card-text text-justify">{props.description}</p>
+        <h5 className="card-title text-center">{title}</h5>
+        <p className="card-text text-justify">{description}</p>
         <p className="card-text">
-          <small className="text-muted">{props.tags}</small>
+          <small className="text-muted">{tags}</small>
         </p>
         {isUser && chunkBuyButton}
         {isAdmin && chunkAdminButton}
@@ -57,6 +71,7 @@ const Card = props => {
 
 Card.propTypes = {
   deleteGood: PropTypes.func,
+  editGood: PropTypes.func,
   picture: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
@@ -69,6 +84,7 @@ Card.propTypes = {
 Card.defaultProps = {
   description: '',
   deleteGood: () => {},
+  editGood: () => {},
   role: 'anon',
 };
 

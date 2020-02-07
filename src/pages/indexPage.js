@@ -7,15 +7,15 @@ import Card from '../sharedComponents/GoodCard/GoodCard';
 import AddGood from './Admin/components/DialogAddGood';
 
 const Page = props => {
-  const { goods, deleteGood, addGood, currentUser } = props;
+  const { goods, deleteGood, addGood, currentUser, editGood } = props;
   const { role } = currentUser;
 
   return (
     <div className="container mt-3">
       <Info />
       <div className="card-columns">
-        {goods.reverse().map((good, index) => (
-          <Card {...good} key={index} deleteGood={deleteGood} role={role} />
+        {goods.map((good, index) => (
+          <Card {...good} key={index} deleteGood={deleteGood} editGood={editGood} role={role} />
         ))}
         <div>
           {role === 'admin' ? (
@@ -53,6 +53,7 @@ Page.propTypes = {
   goods: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteGood: PropTypes.func.isRequired,
   addGood: PropTypes.func.isRequired,
+  editGood: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
 };
 

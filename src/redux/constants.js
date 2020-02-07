@@ -6,3 +6,4 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const CHANGE_NAME = 'CHANGE_NAME';
 export const REQUEST = 'REQUEST';
+export const EDIT_GOOD = 'EDIT_GOOD';
