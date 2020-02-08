@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import PropTypes from 'proptypes';
 
-const PrivateRoute = ({ component: Component, currentUser }) => (
-  <Route render={() => (currentUser.role === 'admin' ? <Component /> : <Redirect to="/" />)} />
+const PrivateRoute = ({ component: Component, currentUser, role }) => (
+  <Route render={() => (currentUser.role === role ? <Component /> : <Redirect to="/" />)} />
 );
 
 const mapStateToProps = state => ({
@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
 });
 
 PrivateRoute.propTypes = {
+  role: PropTypes.string.isRequired,
   component: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
 };

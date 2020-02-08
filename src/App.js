@@ -8,8 +8,7 @@ import Account from './pages/User/UserAccontContainer';
 import Cart from './pages/User/CartPageContainer';
 import { ModalProvider } from './context/ModalContext';
 import ModalRoot from './context/ModalRoot';
-import PrivateRouteAdmin from './sharedComponents/PrivateRoute/PrivateRouteAdmin';
-import PrivateRouteUser from './sharedComponents/PrivateRoute/PrivateRouteUser';
+import PrivateRoute from './sharedComponents/PrivateRoute/PrivateRoute';
 import store from './redux/store';
 
 const App = () => (
@@ -20,9 +19,9 @@ const App = () => (
         <Header />
         <Switch>
           <Route path="/" exact component={Page} />
-          <PrivateRouteUser path="/account" exact component={Account} />
-          <PrivateRouteUser path="/cart" exact component={Cart} />
-          <PrivateRouteAdmin path="/table" exact component={Table} />
+          <PrivateRoute path="/account" exact component={Account} role="user" />
+          <PrivateRoute path="/cart" exact component={Cart} role="user" />
+          <PrivateRoute path="/table" exact component={Table} role="admin" />
         </Switch>
       </ModalProvider>
     </BrowserRouter>
