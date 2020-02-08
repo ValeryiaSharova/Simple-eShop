@@ -8,9 +8,10 @@ import LoginOrReg from '../Dialogs/LoginOrReg/LoginOrReg';
 import LogoutButton from './LogoutButton';
 import ViewAllUserButton from './ViewAllUserButton';
 import AccountButton from './AccountButton';
+import CartButton from './CartButton';
 
 const Header = props => {
-  const { addUser, login, logout, currentUser } = props;
+  const { addUser, login, logout, currentUser, cart } = props;
   const { role } = currentUser;
 
   return (
@@ -44,6 +45,9 @@ const Header = props => {
               </ul>
               {role === 'user' ? (
                 <ul className="navbar-nav navbar-right ml-auto">
+                  <li className="nav-item mr-2">
+                    <CartButton cart={cart} />
+                  </li>
                   <li className="nav-item mr-2">
                     <AccountButton />
                   </li>

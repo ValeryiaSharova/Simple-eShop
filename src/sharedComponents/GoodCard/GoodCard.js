@@ -4,7 +4,7 @@ import { ModalConsumer } from '../../context/ModalContext';
 import EditGood from '../../pages/Admin/components/DialogEditGood';
 
 const Card = props => {
-  const { deleteGood, role, editGood } = props;
+  const { deleteGood, role, editGood, addToCart } = props;
   const { id, title, description, price, picture, tags } = props;
 
   const good = {
@@ -14,6 +14,10 @@ const Card = props => {
     price,
     picture,
     tags,
+  };
+
+  const add = () => {
+    addToCart(good);
   };
 
   const isAdmin = role === 'admin';
@@ -46,7 +50,7 @@ const Card = props => {
 
   const chunkBuyButton = (
     <div className="text-center">
-      <button type="button" className="btn btn-color btn-rounded my-1 mx-1">
+      <button type="button" onClick={add} className="btn btn-color btn-rounded my-1 mx-1">
         Buy for {price}$
         <i className="fas fa-angle-right rounded-circle ml-1 style-circle" />
       </button>
@@ -72,6 +76,7 @@ const Card = props => {
 Card.propTypes = {
   deleteGood: PropTypes.func,
   editGood: PropTypes.func,
+  addToCart: PropTypes.func,
   picture: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
@@ -85,6 +90,7 @@ Card.defaultProps = {
   description: '',
   deleteGood: () => {},
   editGood: () => {},
+  addToCart: () => {},
   role: 'anon',
 };
 

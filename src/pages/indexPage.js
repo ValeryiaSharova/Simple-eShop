@@ -7,7 +7,16 @@ import Card from '../sharedComponents/GoodCard/GoodCard';
 import AddGood from './Admin/components/DialogAddGood';
 
 const Page = props => {
-  const { goods, deleteGood, addGood, currentUser, editGood, loadGoods, loadUsers } = props;
+  const {
+    goods,
+    deleteGood,
+    addGood,
+    currentUser,
+    editGood,
+    loadGoods,
+    loadUsers,
+    addToCart,
+  } = props;
   const { role } = currentUser;
 
   useEffect(() => {
@@ -22,7 +31,14 @@ const Page = props => {
       <Info />
       <div className="card-columns">
         {goods.map((good, index) => (
-          <Card {...good} key={index} deleteGood={deleteGood} editGood={editGood} role={role} />
+          <Card
+            {...good}
+            key={index}
+            deleteGood={deleteGood}
+            editGood={editGood}
+            role={role}
+            addToCart={addToCart}
+          />
         ))}
         <div>
           {role === 'admin' ? (
@@ -63,6 +79,7 @@ Page.propTypes = {
   editGood: PropTypes.func.isRequired,
   loadGoods: PropTypes.func.isRequired,
   loadUsers: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
 };
 

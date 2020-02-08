@@ -10,10 +10,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  const { deleteGood, addGood, editGood, loadGoods } = bindActionCreators(actionsGood, dispatch);
+  const { deleteGood, addGood, editGood, loadGoods, addToCart } = bindActionCreators(
+    actionsGood,
+    dispatch
+  );
   const { loadUsers } = bindActionCreators(actionsUser, dispatch);
 
-  return { deleteGood, addGood, editGood, loadGoods, loadUsers };
+  return { deleteGood, addGood, editGood, loadGoods, loadUsers, addToCart };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

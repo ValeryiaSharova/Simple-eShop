@@ -1,7 +1,8 @@
-import { DELETE_GOOD, ADD_GOOD, EDIT_GOOD, SET_GOODS } from '../constants';
+import { DELETE_GOOD, ADD_GOOD, EDIT_GOOD, SET_GOODS, ADD_TO_CART, LOGOUT } from '../constants';
 
 const initialState = {
   goodsData: [],
+  cart: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +33,20 @@ const reducer = (state = initialState, action) => {
     }
     case SET_GOODS: {
       return { ...state, goodsData: [...state.goodsData, ...action.payload.goods] };
+    }
+    case ADD_TO_CART: {
+      const cart = [...state.cart];
+      cart.push(action.payload.good);
+      const newState = { ...state };
+      newState.cart = cart;
+      return newState;
+    }
+    case LOGOUT: {
+      let cart = [...state.cart];
+      cart = [];
+      const newState = { ...state };
+      newState.cart = cart;
+      return newState;
     }
     default:
       return state;
