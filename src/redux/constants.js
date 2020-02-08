@@ -10,3 +10,4 @@ export const EDIT_GOOD = 'EDIT_GOOD';
 export const SET_GOODS = 'SET_GOODS';
 export const SET_USERS = 'SET_USERS';
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';

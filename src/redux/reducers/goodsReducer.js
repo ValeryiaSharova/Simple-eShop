@@ -1,4 +1,12 @@
-import { DELETE_GOOD, ADD_GOOD, EDIT_GOOD, SET_GOODS, ADD_TO_CART, LOGOUT } from '../constants';
+import {
+  DELETE_GOOD,
+  ADD_GOOD,
+  EDIT_GOOD,
+  SET_GOODS,
+  ADD_TO_CART,
+  LOGOUT,
+  REMOVE_FROM_CART,
+} from '../constants';
 
 const initialState = {
   goodsData: [],
@@ -36,7 +44,13 @@ const reducer = (state = initialState, action) => {
     }
     case ADD_TO_CART: {
       const cart = [...state.cart];
-      cart.push(action.payload.good);
+      const addGood = cart.find(good => good.id === action.payload.good.id);
+      if (!addGood) {
+        cart.push({ count: 1, ...action.payload.good });
+      } else {
+        const index = cart.indexOf(addGood);
+        ++cart[index].count;
+      }
       const newState = { ...state };
       newState.cart = cart;
       return newState;
@@ -44,6 +58,18 @@ const reducer = (state = initialState, action) => {
     case LOGOUT: {
       let cart = [...state.cart];
       cart = [];
+      const newState = { ...state };
+      newState.cart = cart;
+      return newState;
+    }
+    case REMOVE_FROM_CART: {
+      const cart = [...state.cart];
+      const index = cart.indexOf(action.payload.good);
+      if (action.payload.good.count === 1) {
+        cart.splice(index, 1);
+      } else {
+        --cart[index].count;
+      }
       const newState = { ...state };
       newState.cart = cart;
       return newState;

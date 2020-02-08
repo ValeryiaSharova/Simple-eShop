@@ -1,5 +1,12 @@
 import axios from '../axiosInstanse';
-import { DELETE_GOOD, ADD_GOOD, EDIT_GOOD, SET_GOODS, ADD_TO_CART } from '../constants';
+import {
+  DELETE_GOOD,
+  ADD_GOOD,
+  EDIT_GOOD,
+  SET_GOODS,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+} from '../constants';
 
 export const deleteGood = id => ({ type: DELETE_GOOD, payload: { id } });
 
@@ -14,3 +21,5 @@ export const loadGoods = () => dispatch => {
 };
 
 export const addToCart = good => ({ type: ADD_TO_CART, payload: { good } });
+
+export const removeFromCart = good => ({ type: REMOVE_FROM_CART, payload: { good } });
