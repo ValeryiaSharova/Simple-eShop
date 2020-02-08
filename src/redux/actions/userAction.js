@@ -1,3 +1,4 @@
+import axios from '../axiosInstanse';
 import {
   DELETE_USER,
   ADD_USER,
@@ -23,7 +24,5 @@ export const requestForDelete = mail => ({ type: REQUEST, payload: { mail } });
 export const setUsers = users => ({ type: SET_USERS, payload: { users } });
 
 export const loadUsers = () => dispatch => {
-  fetch('http://localhost:3000/users.json')
-    .then(res => res.json())
-    .then(data => dispatch(setUsers(data)));
+  axios.get('/users.json').then(({ data }) => dispatch(setUsers(data)));
 };
