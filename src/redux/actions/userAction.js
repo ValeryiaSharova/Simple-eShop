@@ -24,5 +24,10 @@ export const requestForDelete = mail => ({ type: REQUEST, payload: { mail } });
 export const setUsers = users => ({ type: SET_USERS, payload: { users } });
 
 export const loadUsers = () => dispatch => {
-  axios.get('/users.json').then(({ data }) => dispatch(setUsers(data)));
+  axios
+    .get('/users.json')
+    .then(({ data }) => dispatch(setUsers(data)))
+    .catch(error => {
+      console.log('error', error);
+    });
 };

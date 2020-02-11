@@ -17,7 +17,12 @@ export const editGood = good => ({ type: EDIT_GOOD, payload: { good } });
 export const setGoods = goods => ({ type: SET_GOODS, payload: { goods } });
 
 export const loadGoods = () => dispatch => {
-  axios.get('/goods.json').then(({ data }) => dispatch(setGoods(data)));
+  axios
+    .get('/goods.json')
+    .then(({ data }) => dispatch(setGoods(data)))
+    .catch(error => {
+      console.log('error', error);
+    });
 };
 
 export const addToCart = good => ({ type: ADD_TO_CART, payload: { good } });

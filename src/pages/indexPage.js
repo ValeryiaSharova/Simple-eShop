@@ -5,6 +5,7 @@ import Info from '../sharedComponents/Information/Information';
 import Footer from '../sharedComponents/Footer/Footer';
 import Card from '../sharedComponents/GoodCard/GoodCard';
 import AddGood from './Admin/components/DialogAddGood';
+import Spinner from '../sharedComponents/Spinner/Spinner';
 
 const Page = props => {
   const {
@@ -25,6 +26,14 @@ const Page = props => {
       loadUsers();
     }
   }, [goods.length, loadGoods, loadUsers]);
+
+  if (goods.length === 0) {
+    return (
+      <div className="container mt-3 text-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className="container mt-3">
