@@ -5,8 +5,8 @@ const Registration = props => {
   const { addUser, onRequestClose } = props;
 
   const [newUser, setNewUser] = useState({
-    name: '',
     fname: '',
+    lname: '',
     mail: '',
     pass: '',
     role: 'user',
@@ -34,7 +34,7 @@ const Registration = props => {
                 type="text"
                 className="form-control"
                 id="input-name"
-                name="name"
+                name="fname"
                 required
                 onChange={handleAddUser}
               />
@@ -45,7 +45,7 @@ const Registration = props => {
                 type="text"
                 className="form-control"
                 id="input-fname"
-                name="fname"
+                name="lname"
                 required
                 onChange={handleAddUser}
               />

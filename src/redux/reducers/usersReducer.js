@@ -30,8 +30,8 @@ const reducer = (state = initialState, action) => {
       newState.usersData = users;
       newState.currentUser = {
         isAuth: true,
-        name: action.payload.user.name,
         fname: action.payload.user.fname,
+        lname: action.payload.user.lname,
         mail: action.payload.user.mail,
         role: action.payload.user.role,
         deleteRequest: action.payload.user.deleteRequest,
@@ -48,8 +48,8 @@ const reducer = (state = initialState, action) => {
         if (userInfo.pass === pass) {
           currentUser = {
             isAuth: true,
-            name: userInfo.name,
             fname: userInfo.fname,
+            lname: userInfo.lname,
             mail: userInfo.mail,
             role: userInfo.role,
             deleteRequest: userInfo.deleteRequest,
@@ -70,10 +70,10 @@ const reducer = (state = initialState, action) => {
     }
     case CHANGE_NAME: {
       const users = [...state.usersData];
-      const { name, fname, mail } = action.payload.user;
+      const { fname, lname, mail } = action.payload.user;
       const userInfo = users.find(user => user.mail === mail);
-      userInfo.name = name;
       userInfo.fname = fname;
+      userInfo.lname = lname;
       const newState = { ...state };
       const { currentUser } = state;
       newState.currentUser = { ...currentUser, ...action.payload.user };

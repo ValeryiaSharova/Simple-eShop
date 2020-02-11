@@ -22,19 +22,19 @@ const ChangeNameForm = ({ changeName, currentUser }) => {
           <span className="input-group-text">First and last name</span>
         </div>
         <input
-          name="name"
-          onChange={handleCnahgeName}
-          type="text"
-          aria-label="First name"
-          placeholder={currentUser.name}
-          className="form-control"
-        />
-        <input
           name="fname"
           onChange={handleCnahgeName}
           type="text"
-          aria-label="Last name"
+          aria-label="First name"
           placeholder={currentUser.fname}
+          className="form-control"
+        />
+        <input
+          name="lname"
+          onChange={handleCnahgeName}
+          type="text"
+          aria-label="Last name"
+          placeholder={currentUser.lname}
           className="form-control"
         />
       </div>

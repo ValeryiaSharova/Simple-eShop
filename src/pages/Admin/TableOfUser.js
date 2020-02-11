@@ -28,8 +28,8 @@ const Table = props => {
           {users.map((user, index) => (
             <tr key={index}>
               <th>{index + 1}</th>
-              <td>{user.name}</td>
               <td>{user.fname}</td>
+              <td>{user.lname}</td>
               <td>{user.mail}</td>
               <td>{user.role}</td>
               {user.deleteRequest ? (
