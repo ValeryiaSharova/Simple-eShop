@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "fetch": "^1.1.0",
+    "formik": "^2.1.4",
     "material": "^0.4.3",
     "node-sass": "^4.13.0",
     "proptypes": "^1.1.0",
@@ -25,7 +26,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "route": "^0.2.5",
-    "sass": "^1.23.7"
+    "sass": "^1.23.7",
+    "yup": "^0.28.1"
   },
   "scripts": {
     "start": "react-scripts start",

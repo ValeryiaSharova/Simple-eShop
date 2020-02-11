@@ -8,6 +8,13 @@ $color_shadow: rgba(0, 0, 0, 0.05);
 $font_1: Yeon Sung;
 $font_2: cursive;
 
+.error {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
 .nav-style {
   background-color: $color_1;
 }

@@ -25,17 +25,22 @@ const reducer = (state = initialState, action) => {
     }
     case ADD_USER: {
       const users = [...state.usersData];
-      users.push(action.payload.user);
       const newState = { ...state };
-      newState.usersData = users;
-      newState.currentUser = {
-        isAuth: true,
-        fname: action.payload.user.fname,
-        lname: action.payload.user.lname,
-        mail: action.payload.user.mail,
-        role: action.payload.user.role,
-        deleteRequest: action.payload.user.deleteRequest,
-      };
+      const userInfo = users.find(user => user.mail === action.payload.user.mail);
+      if (!userInfo) {
+        users.push(action.payload.user);
+        newState.usersData = users;
+        newState.currentUser = {
+          isAuth: true,
+          fname: action.payload.user.fname,
+          lname: action.payload.user.lname,
+          mail: action.payload.user.mail,
+          role: action.payload.user.role,
+          deleteRequest: action.payload.user.deleteRequest,
+        };
+      } else {
+        alert('This email has been already registered!');
+      }
       return newState;
     }
     case LOGIN: {
