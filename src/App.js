@@ -19,9 +19,9 @@ const App = () => (
         <Header />
         <Switch>
           <Route path="/" exact component={Page} />
-          <PrivateRoute path="/account" exact component={Account} role="user" />
-          <PrivateRoute path="/cart" exact component={Cart} role="user" />
-          <PrivateRoute path="/table" exact component={Table} role="admin" />
+          <PrivateRoute path="/account" exact component={Account} userRole="user" />
+          <PrivateRoute path="/cart" exact component={Cart} userRole="user" />
+          <PrivateRoute path="/table" exact component={Table} userRole="admin" />
         </Switch>
       </ModalProvider>
     </BrowserRouter>
