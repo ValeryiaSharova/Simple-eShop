@@ -95,10 +95,12 @@ Header.propTypes = {
   logout: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
   role: PropTypes.string,
+  cart: PropTypes.arrayOf(PropTypes.object),
 };
 
 Header.defaultProps = {
   role: 'anon',
+  cart: [],
 };
 
 export default Header;
