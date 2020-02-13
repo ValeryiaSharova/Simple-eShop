@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'proptypes';
 import { ModalConsumer } from '../../context/ModalContext';
 import EditGood from '../../pages/Admin/components/DialogEditGood';
+import Rating from './Rating';
 
 const Card = props => {
   const { deleteGood, role, editGood, addToCart } = props;
@@ -54,6 +55,7 @@ const Card = props => {
         Buy for {price}$
         <i className="fas fa-angle-right rounded-circle ml-1 style-circle" />
       </button>
+      <Rating />
     </div>
   );
 
