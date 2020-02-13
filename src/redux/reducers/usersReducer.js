@@ -6,9 +6,14 @@ import {
   CHANGE_NAME,
   REQUEST,
   SET_USERS,
+  SET_USERS_START,
+  SET_USERS_FAIL,
 } from '../constants';
 
 const initialState = {
+  loadedData: false,
+  loading: false,
+  error: null,
   usersData: [],
   currentUser: { isAuth: false },
 };
@@ -97,7 +102,17 @@ const reducer = (state = initialState, action) => {
       return newState;
     }
     case SET_USERS: {
-      return { ...state, usersData: [...state.usersData, ...action.payload.users] };
+      return {
+        ...state,
+        usersData: [...state.usersData, ...action.payload.users],
+        loading: false,
+      };
+    }
+    case SET_USERS_START: {
+      return { ...state, loading: true };
+    }
+    case SET_USERS_FAIL: {
+      return { ...state, loading: false, error: action.payload.error };
     }
     default:
       return state;

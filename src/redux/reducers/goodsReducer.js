@@ -6,9 +6,15 @@ import {
   ADD_TO_CART,
   LOGOUT,
   REMOVE_FROM_CART,
+  SET_GOODS_FAIL,
+  SET_GOODS_START,
+  SET_GOODS_LOADED,
 } from '../constants';
 
 const initialState = {
+  loadedData: false,
+  loading: false,
+  error: null,
   goodsData: [],
   cart: [],
 };
@@ -40,7 +46,20 @@ const reducer = (state = initialState, action) => {
       return newState;
     }
     case SET_GOODS: {
-      return { ...state, goodsData: [...state.goodsData, ...action.payload.goods] };
+      return {
+        ...state,
+        goodsData: [...state.goodsData, ...action.payload.goods],
+        loading: false,
+      };
+    }
+    case SET_GOODS_START: {
+      return { ...state, loading: true };
+    }
+    case SET_GOODS_FAIL: {
+      return { ...state, loading: false, error: action.payload.error };
+    }
+    case SET_GOODS_LOADED: {
+      return { ...state, loadedData: true };
     }
     case ADD_TO_CART: {
       const cart = [...state.cart];

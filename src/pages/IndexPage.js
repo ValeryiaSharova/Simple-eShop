@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'proptypes';
+import Alert from 'react-bootstrap/Alert';
 import { ModalConsumer } from '../context/ModalContext';
 import Info from '../sharedComponents/Information/Information';
 import Footer from '../sharedComponents/Footer/Footer';
@@ -17,17 +18,22 @@ const Page = props => {
     loadGoods,
     loadUsers,
     addToCart,
+    loadingGoods,
+    errorGoods,
+    loadingUsers,
+    errorUsers,
+    loadedGoods,
   } = props;
   const { role } = currentUser;
 
   useEffect(() => {
-    if (!goods.length) {
+    if (!loadedGoods) {
       loadGoods();
       loadUsers();
     }
-  }, [goods.length, loadGoods, loadUsers]);
+  }, [goods.length, loadGoods, loadUsers, loadedGoods]);
 
-  if (goods.length === 0) {
+  if (loadingGoods || loadingUsers) {
     return (
       <div className="container mt-3 text-center">
         <Spinner />
@@ -35,9 +41,27 @@ const Page = props => {
     );
   }
 
+  if (errorGoods) {
+    return (
+      <div className="container mt-3">
+        <Info />
+        <Alert variant="danger" className="text-center">
+          Goods did not load :( <br />
+          <b className="error-axios">Something went wrong: {errorGoods.message}</b>
+        </Alert>
+      </div>
+    );
+  }
+
   return (
     <div className="container mt-3">
       <Info />
+      {errorUsers ? (
+        <Alert variant="danger" className="text-center">
+          Users did not load. <br />
+          <b className="error-axios">Error: {errorUsers.message}</b>
+        </Alert>
+      ) : null}
       <div className="card-columns">
         {goods.map((good, index) => (
           <Card
@@ -83,6 +107,11 @@ const Page = props => {
 
 Page.propTypes = {
   goods: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loadingGoods: PropTypes.bool.isRequired,
+  errorGoods: PropTypes.object,
+  loadingUsers: PropTypes.bool.isRequired,
+  errorUsers: PropTypes.object,
+  loadedGoods: PropTypes.bool.isRequired,
   deleteGood: PropTypes.func.isRequired,
   addGood: PropTypes.func.isRequired,
   editGood: PropTypes.func.isRequired,
@@ -90,6 +119,11 @@ Page.propTypes = {
   loadUsers: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
+};
+
+Page.defaultProps = {
+  errorGoods: {},
+  errorUsers: {},
 };
 
 export default Page;
