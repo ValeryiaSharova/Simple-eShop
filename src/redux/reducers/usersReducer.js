@@ -1,14 +1,15 @@
+import { handleActions } from 'redux-actions';
 import {
-  DELETE_USER,
-  ADD_USER,
-  LOGIN,
-  LOGOUT,
-  CHANGE_NAME,
-  REQUEST,
-  SET_USERS,
-  SET_USERS_START,
-  SET_USERS_FAIL,
-} from '../constants';
+  deleteUser,
+  addUser,
+  login,
+  logout,
+  changeName,
+  requestForDelete,
+  setUsers,
+  setUsersStart,
+  setUsersFail,
+} from '../actions/userAction';
 
 const initialState = {
   loadedData: false,
@@ -17,43 +18,42 @@ const initialState = {
   usersData: [],
   currentUser: { isAuth: false },
 };
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case DELETE_USER: {
+
+const reducer = handleActions(
+  {
+    [deleteUser]: (state, { payload: { mail } }) => {
       const users = state.usersData;
-      const newUsers = users.filter(
-        user => user.mail !== action.payload.mail || !user.deleteRequest
-      );
+      const newUsers = users.filter(user => user.mail !== mail || !user.deleteRequest);
       const newState = { ...state };
       newState.usersData = newUsers;
       return newState;
-    }
-    case ADD_USER: {
+    },
+    [addUser]: (state, { payload: { user } }) => {
       const users = [...state.usersData];
       const newState = { ...state };
-      const userInfo = users.find(user => user.mail === action.payload.user.mail);
+      const userInfo = users.find(userFind => userFind.mail === user.mail);
       if (!userInfo) {
-        users.push(action.payload.user);
+        users.push(user);
         newState.usersData = users;
         newState.currentUser = {
           isAuth: true,
-          fname: action.payload.user.fname,
-          lname: action.payload.user.lname,
-          mail: action.payload.user.mail,
-          role: action.payload.user.role,
-          deleteRequest: action.payload.user.deleteRequest,
+          fname: user.fname,
+          lname: user.lname,
+          mail: user.mail,
+          role: user.role,
+          deleteRequest: user.deleteRequest,
         };
       } else {
-        alert('This email has been already registered!');
+        return newState;
       }
       return newState;
-    }
-    case LOGIN: {
+    },
+    [login]: (state, { payload: { user } }) => {
       const newState = { ...state };
       let { currentUser } = state;
       const users = [...state.usersData];
-      const { mail, pass } = action.payload.user;
-      const userInfo = users.find(user => user.mail === mail);
+      const { mail, pass } = user;
+      const userInfo = users.find(userFind => userFind.mail === mail);
       if (userInfo) {
         if (userInfo.pass === pass) {
           currentUser = {
@@ -65,58 +65,51 @@ const reducer = (state = initialState, action) => {
             deleteRequest: userInfo.deleteRequest,
           };
         } else {
-          alert('error pass');
+          return newState;
         }
       } else {
-        alert('error email');
+        return newState;
       }
       newState.currentUser = currentUser;
+
       return newState;
-    }
-    case LOGOUT: {
+    },
+    [logout]: state => {
       const newState = { ...state };
       newState.currentUser = initialState.currentUser;
       return newState;
-    }
-    case CHANGE_NAME: {
+    },
+    [changeName]: (state, { payload: { user } }) => {
       const users = [...state.usersData];
-      const { fname, lname, mail } = action.payload.user;
-      const userInfo = users.find(user => user.mail === mail);
+      const { fname, lname, mail } = user;
+      const userInfo = users.find(userFind => userFind.mail === mail);
       userInfo.fname = fname;
       userInfo.lname = lname;
       const newState = { ...state };
       const { currentUser } = state;
-      newState.currentUser = { ...currentUser, ...action.payload.user };
+      newState.currentUser = { ...currentUser, ...user };
       newState.usersData = users;
       return newState;
-    }
-    case REQUEST: {
+    },
+    [requestForDelete]: (state, { payload: { mail } }) => {
       const users = [...state.usersData];
-      const { mail } = action.payload;
-      const userInfo = users.find(user => user.mail === mail);
+      const userInfo = users.find(userFind => userFind.mail === mail);
       userInfo.deleteRequest = true;
       const newState = { ...state };
       newState.usersData = users;
       const { currentUser } = state;
       newState.currentUser = { ...currentUser, deleteRequest: true };
       return newState;
-    }
-    case SET_USERS: {
-      return {
-        ...state,
-        usersData: [...state.usersData, ...action.payload.users],
-        loading: false,
-      };
-    }
-    case SET_USERS_START: {
-      return { ...state, loading: true };
-    }
-    case SET_USERS_FAIL: {
-      return { ...state, loading: false, error: action.payload.error };
-    }
-    default:
-      return state;
-  }
-};
+    },
+    [setUsers]: (state, { payload: { users } }) => ({
+      ...state,
+      usersData: [...state.usersData, ...users],
+      loading: false,
+    }),
+    [setUsersStart]: state => ({ ...state, loading: true }),
+    [setUsersFail]: (state, { payload: { error } }) => ({ ...state, loading: false, error }),
+  },
+  initialState
+);
 
 export default reducer;
