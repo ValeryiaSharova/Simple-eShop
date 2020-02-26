@@ -45,6 +45,7 @@ const Header = props => {
               </ul>
               {role === 'user' ? (
                 <ul className="navbar-nav navbar-right ml-auto">
+                  <li className="nav-item mr-2 mt-1 nav-greeting">Hello, {currentUser.fname}</li>
                   <li className="nav-item mr-2">
                     <CartButton cart={cart} />
                   </li>
