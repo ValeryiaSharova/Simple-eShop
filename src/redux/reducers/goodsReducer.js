@@ -1,8 +1,6 @@
 import { handleActions } from 'redux-actions';
 import {
   deleteGood,
-  addGood,
-  editGood,
   setGoods,
   setGoodsStart,
   setGoodsFail,
@@ -10,6 +8,7 @@ import {
   addToCart,
   removeFromCart,
   logout,
+  updateGoods,
 } from '../actions/goodsAction';
 
 const initialState = {
@@ -17,6 +16,7 @@ const initialState = {
   loading: false,
   error: null,
   goodsData: [],
+  visibleGoods: [],
   cart: [],
 };
 
@@ -27,29 +27,18 @@ const reducer = handleActions(
       const newGoods = goods.filter(good => good.id !== id);
       const newState = { ...state };
       newState.goodsData = newGoods;
-      return newState;
-    },
-    [addGood]: (state, { payload: { good } }) => {
-      const goods = [...state.goodsData];
-      goods.unshift(good);
-      goods[0].id = goods.length;
-      const newState = { ...state };
-      newState.goodsData = goods;
-      return newState;
-    },
-    [editGood]: (state, { payload: { good } }) => {
-      const goods = [...state.goodsData];
-      const newGood = good;
-      const goodId = goods.find(goodFind => goodFind.id === newGood.id).id;
-      goods[goods.length - goodId] = { ...goods[goodId], ...newGood };
-      const newState = { ...state };
-      newState.goodsData = goods;
+      newState.visibleGoods = newGoods;
       return newState;
     },
     [setGoods]: (state, { payload: { goods } }) => ({
       ...state,
-      goodsData: [...state.goodsData, ...goods],
+      goodsData: goods,
+      visibleGoods: goods,
       loading: false,
+    }),
+    [updateGoods]: (state, { payload: { goods } }) => ({
+      ...state,
+      visibleGoods: goods,
     }),
     [setGoodsStart]: state => ({ ...state, loading: true }),
     [setGoodsFail]: (state, { payload: { error } }) => ({ ...state, loading: false, error }),

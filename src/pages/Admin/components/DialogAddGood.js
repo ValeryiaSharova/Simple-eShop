@@ -32,7 +32,7 @@ const AddGood = ({ onRequestClose, addGood }) => {
   });
 
   const add = values => {
-    const goodNew = { id: 0, ...values };
+    const goodNew = { id: 0, ...values, rating: [] };
     addGood(goodNew);
     onRequestClose();
   };
