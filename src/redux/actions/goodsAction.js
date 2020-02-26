@@ -37,3 +37,25 @@ export const loadGoods = () => dispatch => {
       dispatch(setGoodsFail(error));
     });
 };
+export const setRating = (id, rating) => (dispatch, getState) => {
+  const { goods } = getState();
+  const updatedGoods = goods.goodsData.map(good => {
+    if (good.id === id) {
+      return { ...good, rating: [...good.rating, rating] };
+    }
+    return good;
+  });
+  dispatch(setGoods(updatedGoods));
+};
+
+export const deleteRating = (id, mail) => (dispatch, getState) => {
+  const { goods } = getState();
+  const updatedGoods = goods.goodsData.map(good => {
+    if (good.id === id) {
+      const ratingId = good.rating.indexOf(mail);
+      good.rating.splice(ratingId, 1);
+    }
+    return good;
+  });
+  dispatch(setGoods(updatedGoods));
+};

@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './IndexPage';
-import * as actionsGood from '../redux/actions/goodsAction';
-import * as actionsUser from '../redux/actions/userAction';
+import * as actionsGood from '../../redux/actions/goodsAction';
+import * as actionsUser from '../../redux/actions/userAction';
 
 const mapStateToProps = state => ({
-  goods: state.goods.goodsData,
+  goods: state.goods.visibleGoods,
   currentUser: state.users.currentUser,
   loadedGoods: state.goods.loadedData,
   loadingGoods: state.goods.loading,
@@ -16,13 +16,29 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  const { deleteGood, addGood, editGood, loadGoods, addToCart } = bindActionCreators(
-    actionsGood,
-    dispatch
-  );
+  const {
+    deleteGood,
+    addGood,
+    editGood,
+    loadGoods,
+    addToCart,
+    search,
+    setRating,
+    deleteRating,
+  } = bindActionCreators(actionsGood, dispatch);
   const { loadUsers } = bindActionCreators(actionsUser, dispatch);
 
-  return { deleteGood, addGood, editGood, loadGoods, loadUsers, addToCart };
+  return {
+    deleteGood,
+    addGood,
+    editGood,
+    loadGoods,
+    loadUsers,
+    addToCart,
+    search,
+    setRating,
+    deleteRating,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

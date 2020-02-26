@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './sharedComponents/Header/HeaderContainer';
 import Table from './pages/Admin/TableContainer';
-import Page from './pages/IndexPageContainer';
+import Page from './pages/Index/IndexPageContainer';
 import Account from './pages/User/UserAccontContainer';
 import Cart from './pages/User/CartPageContainer';
 import { ModalProvider } from './context/ModalContext';

@@ -85,6 +85,15 @@ div {
   font-weight: bolder;
   color: $white;
 }
+.btn-trash {
+  background-color: $white;
+  border-color: $white;
+  font-weight: bolder;
+  color: $black;
+  border-radius: 19px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 .box-shadow {
   box-shadow: 0 0.25rem 0.75rem $color_shadow;
 }
