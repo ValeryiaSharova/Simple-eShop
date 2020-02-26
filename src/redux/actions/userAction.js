@@ -11,6 +11,7 @@ export const {
   setUsers,
   setUsersStart,
   setUsersFail,
+  updateUsers,
 } = createActions({
   DELETE_USER: mail => ({ mail }),
   ADD_USER: user => ({ user }),
@@ -21,6 +22,7 @@ export const {
   SET_USERS: users => ({ users }),
   SET_USERS_START: () => ({}),
   SET_USERS_FAIL: error => ({ error }),
+  UPDATE_USERS: users => ({ users }),
 });
 
 export const loadUsers = () => dispatch => {
@@ -33,4 +35,19 @@ export const loadUsers = () => dispatch => {
     .catch(error => {
       dispatch(setUsersFail(error));
     });
+};
+export const search = input => (dispatch, getState) => {
+  const { users } = getState();
+  const { usersData } = users;
+  const info = input.toLowerCase().trim();
+  if (info.length === 0) {
+    return dispatch(updateUsers(usersData));
+  }
+  const updatedUsers = usersData.filter(
+    user =>
+      user.fname.toLowerCase() === info
+      || user.lname.toLowerCase() === info
+      || user.mail.toLowerCase() === info
+  );
+  return dispatch(updateUsers(updatedUsers));
 };

@@ -9,6 +9,7 @@ import {
   setUsers,
   setUsersStart,
   setUsersFail,
+  updateUsers,
 } from '../actions/userAction';
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   loading: false,
   error: null,
   usersData: [],
+  visibleUsers: [],
   currentUser: { isAuth: false },
 };
 
@@ -26,6 +28,7 @@ const reducer = handleActions(
       const newUsers = users.filter(user => user.mail !== mail || !user.deleteRequest);
       const newState = { ...state };
       newState.usersData = newUsers;
+      newState.visibleUsers = newUsers;
       return newState;
     },
     [addUser]: (state, { payload: { user } }) => {
@@ -35,6 +38,7 @@ const reducer = handleActions(
       if (!userInfo) {
         users.push(user);
         newState.usersData = users;
+        newState.visibleUsers = users;
         newState.currentUser = {
           isAuth: true,
           fname: user.fname,
@@ -103,9 +107,11 @@ const reducer = handleActions(
     },
     [setUsers]: (state, { payload: { users } }) => ({
       ...state,
-      usersData: [...state.usersData, ...users],
+      usersData: users,
+      visibleUsers: users,
       loading: false,
     }),
+    [updateUsers]: (state, { payload: { users } }) => ({ ...state, visibleUsers: users }),
     [setUsersStart]: state => ({ ...state, loading: true }),
     [setUsersFail]: (state, { payload: { error } }) => ({ ...state, loading: false, error }),
   },

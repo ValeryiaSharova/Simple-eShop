@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'proptypes';
 import Footer from '../../sharedComponents/Footer/Footer';
+import Search from './components/Search';
 
 const Table = props => {
-  const { users, deleteUser } = props;
+  const { users, deleteUser, search } = props;
 
   const handleDelete = mail => () => {
     deleteUser(mail);
@@ -12,6 +13,7 @@ const Table = props => {
   return (
     <div className="container mt-3">
       <h2>Page for admin</h2>
+      <Search search={search} />
       <hr />
       <table className="table table-hover table-borderless text-center" id="table-of-users">
         <thead className="thead-light">
