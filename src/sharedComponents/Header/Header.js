@@ -11,7 +11,7 @@ import AccountButton from './AccountButton';
 import CartButton from './CartButton';
 
 const Header = props => {
-  const { addUser, login, logout, currentUser, cart } = props;
+  const { logout, currentUser, cart } = props;
   const { role } = currentUser;
 
   return (
@@ -73,7 +73,7 @@ const Header = props => {
                         <button
                           type="button"
                           className="btn btn-nav mt-1"
-                          onClick={() => showModal(LoginOrReg, { addUser, login })}
+                          onClick={() => showModal(LoginOrReg)}
                         >
                           Login or Register
                         </button>
@@ -91,8 +91,6 @@ const Header = props => {
 };
 
 Header.propTypes = {
-  addUser: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
   role: PropTypes.string,

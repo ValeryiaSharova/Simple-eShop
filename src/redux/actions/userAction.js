@@ -4,7 +4,9 @@ import axios from '../axiosInstanse';
 export const {
   deleteUser,
   addUser,
+  setRegistrationError,
   login,
+  setLoginError,
   logout,
   changeName,
   requestForDelete,
@@ -14,8 +16,10 @@ export const {
   updateUsers,
 } = createActions({
   DELETE_USER: mail => ({ mail }),
-  ADD_USER: user => ({ user }),
+  ADD_USER: (user, updatedUsers) => ({ user, updatedUsers }),
+  SET_REGISTRATION_ERROR: error => ({ error }),
   LOGIN: user => ({ user }),
+  SET_LOGIN_ERROR: error => ({ error }),
   LOGOUT: () => ({}),
   CHANGE_NAME: user => ({ user }),
   REQUEST_FOR_DELETE: mail => ({ mail }),
@@ -36,6 +40,32 @@ export const loadUsers = () => dispatch => {
       dispatch(setUsersFail(error));
     });
 };
+
+export const signin = user => (dispatch, getState) => {
+  const { users } = getState();
+  const userInfo = users.usersData.find(userFind => userFind.mail === user.mail);
+  if (userInfo) {
+    if (userInfo.pass === user.pass) {
+      dispatch(login(userInfo));
+    } else {
+      dispatch(setLoginError('error'));
+    }
+  } else {
+    dispatch(setLoginError('error'));
+  }
+};
+
+export const registration = user => (dispatch, getState) => {
+  const { users } = getState();
+  const { usersData } = users;
+  const userInfo = usersData.find(userFind => userFind.mail === user.mail);
+  if (!userInfo) {
+    const updatedUsers = [...usersData, user];
+    return dispatch(addUser(user, updatedUsers));
+  }
+  return dispatch(setRegistrationError('error'));
+};
+
 export const search = input => (dispatch, getState) => {
   const { users } = getState();
   const { usersData } = users;

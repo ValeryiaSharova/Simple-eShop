@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'proptypes';
 
 const Login = props => {
-  const { login, onRequestClose } = props;
+  const { signin, onRequestClose, loginErrorFlag, currentUser } = props;
 
   const [loginUser, setLoginUser] = useState({
     mail: '',
     pass: '',
   });
 
+  const [error, setError] = useState(false);
+
   const handleLogin = e => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    if (loginErrorFlag === 'error') {
+      setError(true);
+    } else {
+      setError(false);
+    }
+    if (currentUser.isAuth) {
+      onRequestClose();
+    }
+  }, [currentUser.isAuth, error, loginErrorFlag, onRequestClose]);
+
   const logUser = e => {
     e.preventDefault();
-    login(loginUser);
-    onRequestClose();
+    signin(loginUser);
   };
 
   return (
@@ -45,6 +57,7 @@ const Login = props => {
           </div>
           <div className="text-center mt-2">
             <input onClick={logUser} type="submit" value="Login" className="btn btn-modal" />
+            {error ? <span className="error">Incorrect username or password.</span> : null}
           </div>
         </form>
       </div>
@@ -53,8 +66,10 @@ const Login = props => {
 };
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired,
+  signin: PropTypes.func.isRequired,
+  loginErrorFlag: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default Login;

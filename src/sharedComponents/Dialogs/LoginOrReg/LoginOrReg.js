@@ -7,11 +7,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'proptypes';
-import Login from '../../Header/Login';
-import Registration from '../../Header/Registration';
+import Login from '../../Header/LoginContainer';
+import Registration from '../../Header/RegistrationContainer';
 import TabPanel from './TabPanel';
 
-const LoginOrRegister = ({ onRequestClose, addUser, login }) => {
+const LoginOrRegister = ({ onRequestClose }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -42,10 +42,10 @@ const LoginOrRegister = ({ onRequestClose, addUser, login }) => {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <Login login={login} onRequestClose={onRequestClose} />
+          <Login onRequestClose={onRequestClose} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Registration addUser={addUser} onRequestClose={onRequestClose} />
+          <Registration onRequestClose={onRequestClose} />
         </TabPanel>
       </DialogContent>
       <DialogActions>
@@ -59,8 +59,6 @@ const LoginOrRegister = ({ onRequestClose, addUser, login }) => {
 
 LoginOrRegister.propTypes = {
   onRequestClose: PropTypes.func.isRequired,
-  addUser: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
 };
 
 export default LoginOrRegister;

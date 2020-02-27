@@ -2,7 +2,9 @@ import { handleActions } from 'redux-actions';
 import {
   deleteUser,
   addUser,
+  setRegistrationError,
   login,
+  setLoginError,
   logout,
   changeName,
   requestForDelete,
@@ -13,6 +15,8 @@ import {
 } from '../actions/userAction';
 
 const initialState = {
+  loginErrorFlag: null,
+  registrationErrorFlag: null,
   loadedData: false,
   loading: false,
   error: null,
@@ -31,53 +35,37 @@ const reducer = handleActions(
       newState.visibleUsers = newUsers;
       return newState;
     },
-    [addUser]: (state, { payload: { user } }) => {
-      const users = [...state.usersData];
+    [addUser]: (state, { payload: { user, updatedUsers } }) => {
       const newState = { ...state };
-      const userInfo = users.find(userFind => userFind.mail === user.mail);
-      if (!userInfo) {
-        users.push(user);
-        newState.usersData = users;
-        newState.visibleUsers = users;
-        newState.currentUser = {
-          isAuth: true,
-          fname: user.fname,
-          lname: user.lname,
-          mail: user.mail,
-          role: user.role,
-          deleteRequest: user.deleteRequest,
-        };
-      } else {
-        return newState;
-      }
+      newState.usersData = updatedUsers;
+      newState.visibleUsers = updatedUsers;
+      newState.registrationErrorFlag = null;
+      newState.currentUser = { ...user, isAuth: true };
       return newState;
     },
+    [setRegistrationError]: (state, { payload: { error } }) => ({
+      ...state,
+      registrationErrorFlag: error,
+    }),
     [login]: (state, { payload: { user } }) => {
       const newState = { ...state };
       let { currentUser } = state;
-      const users = [...state.usersData];
-      const { mail, pass } = user;
-      const userInfo = users.find(userFind => userFind.mail === mail);
-      if (userInfo) {
-        if (userInfo.pass === pass) {
-          currentUser = {
-            isAuth: true,
-            fname: userInfo.fname,
-            lname: userInfo.lname,
-            mail: userInfo.mail,
-            role: userInfo.role,
-            deleteRequest: userInfo.deleteRequest,
-          };
-        } else {
-          return newState;
-        }
-      } else {
-        return newState;
-      }
+      currentUser = {
+        isAuth: true,
+        fname: user.fname,
+        lname: user.lname,
+        mail: user.mail,
+        role: user.role,
+        deleteRequest: user.deleteRequest,
+      };
+      newState.loginErrorFlag = null;
       newState.currentUser = currentUser;
-
       return newState;
     },
+    [setLoginError]: (state, { payload: { error } }) => ({
+      ...state,
+      loginErrorFlag: error,
+    }),
     [logout]: state => {
       const newState = { ...state };
       newState.currentUser = initialState.currentUser;

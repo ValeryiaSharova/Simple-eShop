@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'proptypes';
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 
 const Registration = props => {
-  const { addUser, onRequestClose } = props;
+  const { registrationErrorFlag, registration, onRequestClose, currentUser } = props;
 
   const schema = yup.object().shape({
     fname: yup
@@ -28,10 +28,22 @@ const Registration = props => {
       .required('Required'),
   });
 
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (registrationErrorFlag === 'error') {
+      setError(true);
+    } else {
+      setError(false);
+    }
+    if (currentUser.isAuth) {
+      onRequestClose();
+    }
+  }, [currentUser.isAuth, error, onRequestClose, registrationErrorFlag]);
+
   const add = values => {
     const newUser = { ...values, role: 'user', deleteRequest: false };
-    addUser(newUser);
-    onRequestClose();
+    registration(newUser);
   };
 
   return (
@@ -77,6 +89,9 @@ const Registration = props => {
                   <button type="submit" className="btn btn-modal">
                     Create account
                   </button>
+                  {error ? (
+                    <span className="error">This email has already been registered.</span>
+                  ) : null}
                 </div>
               </fieldset>
             </Form>
@@ -88,7 +103,8 @@ const Registration = props => {
 };
 
 Registration.propTypes = {
-  addUser: PropTypes.func.isRequired,
+  registration: PropTypes.func.isRequired,
+  registrationErrorFlag: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired,
 };
 
