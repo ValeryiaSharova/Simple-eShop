@@ -104,8 +104,13 @@ const Registration = props => {
 
 Registration.propTypes = {
   registration: PropTypes.func.isRequired,
-  registrationErrorFlag: PropTypes.bool.isRequired,
+  registrationErrorFlag: PropTypes.string,
   onRequestClose: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired,
+};
+
+Registration.defaultProps = {
+  registrationErrorFlag: null,
 };
 
 export default Registration;

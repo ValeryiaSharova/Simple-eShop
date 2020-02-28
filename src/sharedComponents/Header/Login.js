@@ -67,9 +67,13 @@ const Login = props => {
 
 Login.propTypes = {
   signin: PropTypes.func.isRequired,
-  loginErrorFlag: PropTypes.bool.isRequired,
+  loginErrorFlag: PropTypes.string,
   onRequestClose: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
+};
+
+Login.defaultProps = {
+  loginErrorFlag: null,
 };
 
 export default Login;

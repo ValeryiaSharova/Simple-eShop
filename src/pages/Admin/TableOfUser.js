@@ -59,6 +59,7 @@ const Table = props => {
 Table.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
   deleteUser: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
 };
 
 export default Table;
