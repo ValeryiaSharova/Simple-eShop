@@ -77,7 +77,7 @@ export const search = input => (dispatch, getState) => {
     user =>
       user.fname.toLowerCase() === info
       || user.lname.toLowerCase() === info
-      || user.mail.toLowerCase() === info
+      || user.mail.toLowerCase().indexOf(info) > -1
   );
   return dispatch(updateUsers(updatedUsers));
 };
