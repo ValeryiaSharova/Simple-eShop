@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'proptypes';
 import Alert from 'react-bootstrap/Alert';
+import Grid from '@material-ui/core/Grid';
 import { ModalConsumer } from '../../context/ModalContext';
 import Info from '../../sharedComponents/Information/Information';
 import Footer from '../../sharedComponents/Footer/Footer';
@@ -8,6 +9,7 @@ import Card from '../../sharedComponents/GoodCard/GoodCard';
 import AddGood from '../Admin/components/DialogAddGood';
 import Spinner from '../../sharedComponents/Spinner/Spinner';
 import Search from './components/Search';
+import MySwitch from './components/MySwitch';
 
 const Page = props => {
   const {
@@ -36,6 +38,12 @@ const Page = props => {
       loadUsers();
     }
   }, [goods.length, loadGoods, loadUsers, loadedGoods]);
+
+  const [switchState, setSwitchState] = useState(false);
+
+  const handleChangeSwitch = event => {
+    setSwitchState(event.target.checked);
+  };
 
   if (loadingGoods || loadingUsers) {
     return (
@@ -66,22 +74,43 @@ const Page = props => {
           <b className="error-axios">Error: {errorUsers.message}</b>
         </Alert>
       ) : null}
-      <Search search={search} />
+      <Grid container alignItems="center" justify="center" direction="row">
+        <Search search={search} />
+        <Grid item>All goods</Grid>
+        <Grid item>
+          <MySwitch checked={switchState} onChange={handleChangeSwitch} value="state" />
+        </Grid>
+        <Grid item>Evaluated goods</Grid>
+      </Grid>
       <hr />
       <div className="card-columns">
-        {goods.map(good => (
-          <Card
-            {...good}
-            key={good.id}
-            deleteGood={deleteGood}
-            editGood={editGood}
-            role={role}
-            addToCart={addToCart}
-            setRating={setRating}
-            currentUser={currentUser}
-            deleteRating={deleteRating}
-          />
-        ))}
+        {!switchState
+          ? goods.map(good => (
+            <Card
+              {...good}
+              key={good.id}
+              deleteGood={deleteGood}
+              editGood={editGood}
+              role={role}
+              addToCart={addToCart}
+              setRating={setRating}
+              currentUser={currentUser}
+              deleteRating={deleteRating}
+            />
+          ))
+          : goods
+            .filter(good => good.rating.some(rating => rating.mail === currentUser.mail))
+            .map(good => (
+              <Card
+                {...good}
+                key={good.id}
+                role={role}
+                addToCart={addToCart}
+                setRating={setRating}
+                currentUser={currentUser}
+                deleteRating={deleteRating}
+              />
+            ))}
         <div>
           {role === 'admin' ? (
             <ModalConsumer>

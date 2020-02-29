@@ -9,16 +9,14 @@ const Search = ({ search }) => {
   };
 
   return (
-    <div className="divleft">
-      <Form inline>
-        <FormControl
-          type="text"
-          placeholder="Search"
-          className="mr-sm-2"
-          onChange={handleSearchTag}
-        />
-      </Form>
-    </div>
+    <Form inline>
+      <FormControl
+        type="text"
+        placeholder="Search"
+        className="mr-sm-2"
+        onChange={handleSearchTag}
+      />
+    </Form>
   );
 };
 
