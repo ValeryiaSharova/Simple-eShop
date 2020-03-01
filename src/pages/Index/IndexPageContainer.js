@@ -7,6 +7,7 @@ import * as actionsUser from '../../redux/actions/userAction';
 const mapStateToProps = state => ({
   goods: state.goods.visibleGoods,
   currentUser: state.users.currentUser,
+  users: state.users.usersData,
   loadedGoods: state.goods.loadedData,
   loadingGoods: state.goods.loading,
   errorGoods: state.goods.error,

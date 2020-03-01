@@ -2,10 +2,20 @@ import React, { memo } from 'react';
 import PropTypes from 'proptypes';
 import { ModalConsumer } from '../../context/ModalContext';
 import EditGood from '../../pages/Admin/components/DialogEditGood';
+import AllEvaluations from '../Dialogs/GoodCard/AllEvaluations';
 import SimpleRating from './SimpleRating';
 
 const Card = props => {
-  const { deleteGood, role, editGood, addToCart, setRating, currentUser, deleteRating } = props;
+  const {
+    deleteGood,
+    role,
+    editGood,
+    addToCart,
+    setRating,
+    currentUser,
+    deleteRating,
+    users,
+  } = props;
   const { id, title, description, price, picture, tags, rating } = props;
 
   const good = {
@@ -76,6 +86,22 @@ const Card = props => {
             <small key={tag} className="text-muted">{`#${tag} `}</small>
           ))}
         </p>
+        {currentUser.isAuth ? (
+          <div className="text-center">
+            <ModalConsumer>
+              {({ showModal }) => (
+                <button
+                  type="button"
+                  className="btn btn-color btn-rounded my-1 mx-1"
+                  onClick={() => showModal(AllEvaluations, { rating, users })}
+                >
+                  View all evaluations
+                  <i className="fas fa-angle-right rounded-circle ml-1 style-circle" />
+                </button>
+              )}
+            </ModalConsumer>
+          </div>
+        ) : null}
         {isUser && chunkBuyButton}
         {isAdmin && chunkAdminButton}
       </div>
@@ -97,6 +123,7 @@ Card.propTypes = {
   setRating: PropTypes.func.isRequired,
   deleteRating: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired,
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
   rating: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

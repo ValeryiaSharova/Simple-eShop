@@ -29,6 +29,7 @@ const Page = props => {
     search,
     setRating,
     deleteRating,
+    users,
   } = props;
   const { role } = currentUser;
 
@@ -96,6 +97,7 @@ const Page = props => {
               setRating={setRating}
               currentUser={currentUser}
               deleteRating={deleteRating}
+              users={users}
             />
           ))
           : goods
@@ -109,6 +111,7 @@ const Page = props => {
                 setRating={setRating}
                 currentUser={currentUser}
                 deleteRating={deleteRating}
+                users={users}
               />
             ))}
         <div>
@@ -160,6 +163,7 @@ Page.propTypes = {
   search: PropTypes.func.isRequired,
   setRating: PropTypes.func.isRequired,
   deleteRating: PropTypes.func.isRequired,
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 Page.defaultProps = {
