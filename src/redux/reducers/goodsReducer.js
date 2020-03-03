@@ -22,14 +22,11 @@ const initialState = {
 
 const reducer = handleActions(
   {
-    [deleteGood]: (state, { payload: { id } }) => {
-      const goods = [...state.goodsData];
-      const newGoods = goods.filter(good => good.id !== id);
-      const newState = { ...state };
-      newState.goodsData = newGoods;
-      newState.visibleGoods = newGoods;
-      return newState;
-    },
+    [deleteGood]: (state, { payload: { id } }) => ({
+      ...state,
+      goodsData: state.goodsData.filter(good => good.id !== id),
+      visibleGoods: state.goodsData.filter(good => good.id !== id),
+    }),
     [setGoods]: (state, { payload: { goods } }) => ({
       ...state,
       goodsData: goods,
@@ -67,13 +64,10 @@ const reducer = handleActions(
       newState.cart = cart;
       return newState;
     },
-    [logout]: state => {
-      let cart = [...state.cart];
-      cart = [];
-      const newState = { ...state };
-      newState.cart = cart;
-      return newState;
-    },
+    [logout]: state => ({
+      ...state,
+      cart: [],
+    }),
   },
   initialState
 );

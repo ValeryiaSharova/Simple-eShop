@@ -27,50 +27,35 @@ const initialState = {
 
 const reducer = handleActions(
   {
-    [deleteUser]: (state, { payload: { mail } }) => {
-      const users = state.usersData;
-      const newUsers = users.filter(user => user.mail !== mail || !user.deleteRequest);
-      const newState = { ...state };
-      newState.usersData = newUsers;
-      newState.visibleUsers = newUsers;
-      return newState;
-    },
-    [addUser]: (state, { payload: { user, updatedUsers } }) => {
-      const newState = { ...state };
-      newState.usersData = updatedUsers;
-      newState.visibleUsers = updatedUsers;
-      newState.registrationErrorFlag = null;
-      newState.currentUser = { ...user, isAuth: true };
-      return newState;
-    },
+    [deleteUser]: (state, { payload: { mail } }) => ({
+      ...state,
+      usersData: state.usersData.filter(user => user.mail !== mail || !user.deleteRequest),
+      visibleUsers: state.usersData.filter(user => user.mail !== mail || !user.deleteRequest),
+    }),
+    [addUser]: (state, { payload: { user, updatedUsers } }) => ({
+      ...state,
+      usersData: updatedUsers,
+      visibleUsers: updatedUsers,
+      registrationErrorFlag: null,
+      currentUser: { ...user, isAuth: true },
+    }),
     [setRegistrationError]: (state, { payload: { error } }) => ({
       ...state,
       registrationErrorFlag: error,
     }),
-    [login]: (state, { payload: { user } }) => {
-      const newState = { ...state };
-      let { currentUser } = state;
-      currentUser = {
-        isAuth: true,
-        fname: user.fname,
-        lname: user.lname,
-        mail: user.mail,
-        role: user.role,
-        deleteRequest: user.deleteRequest,
-      };
-      newState.loginErrorFlag = null;
-      newState.currentUser = currentUser;
-      return newState;
-    },
+    [login]: (state, { payload: { user } }) => ({
+      ...state,
+      loginErrorFlag: null,
+      currentUser: { isAuth: true, ...user },
+    }),
     [setLoginError]: (state, { payload: { error } }) => ({
       ...state,
       loginErrorFlag: error,
     }),
-    [logout]: state => {
-      const newState = { ...state };
-      newState.currentUser = initialState.currentUser;
-      return newState;
-    },
+    [logout]: state => ({
+      ...state,
+      currentUser: initialState.currentUser,
+    }),
     [changeName]: (state, { payload: { user } }) => {
       const users = [...state.usersData];
       const { fname, lname, mail } = user;
