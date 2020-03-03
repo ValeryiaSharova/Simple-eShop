@@ -43,5 +43,59 @@
     "picture": "https://s3-goods.ozstatic.by/2000/505/603/10/10603505_0.jpg",
     "tags": ["MiddleAges", "Construction"],
     "rating": []
+  },
+  {
+    "id": 6,
+    "title": "Epic battles of battle magicians. Outrage at the Castle of the Slaughterhouse.",
+    "description": "Cast battle spells and feed the sinister beasts, gnawing chains in the dungeons of the castle of Sprutoboyne. The frantic Serpent Kurinich, the indestructible Cubodemon and the agile Hamadrantul will turn your enemies into a pool of hairy ectoplasm. And if you yourself glued fins for the company, boldly resurrect when no one is waiting, and instantly merge into grandiose atrocities!",
+    "price": 22,
+    "picture": "https://s4-goods.ozstatic.by/2000/6/545/10/10545006_0.jpg",
+    "tags": ["Magic", "Fantasy", "Comedy"],
+    "rating": []
+  },
+  {
+    "id": 7,
+    "title": "Dead Season. Long night.",
+    "description": "“Dead season. Long night” is a semi-cooperative game in which each participant controls a separate group of people (everyone starts the game with two characters) as part of a small colony of survivors, day after day fighting the deadly virus and an endless stream of the dead.",
+    "price": 61,
+    "picture": "https://s4-goods.ozstatic.by/2000/976/671/10/10671976_0.jpg",
+    "tags": ["Zombie", "PostApocalypse"],
+    "rating": []
+  },
+  {
+    "id": 8,
+    "title": "Dungeon Kingdom of the Ice Witch.",
+    "description": "Since time immemorial, the witch Kolizar has been hiding in winter halls on the border of the kingdom of people. But now the witching winter has come, and hordes of ice demons inspire fear in the southern lands! Will the heroes dare to come to the monastery of Kolizar and stop her, until the whole world is wrapped in the frosty breath of death?",
+    "price": 13,
+    "picture": "https://s3-goods.ozstatic.by/2000/544/494/10/10494544_0.jpg",
+    "tags": ["Fantasy"],
+    "rating": []
+  },
+  {
+    "id": 9,
+    "title": "Gentleman's deal",
+    "description": "In this game you will need to use all your knowledge about negotiations and diplomacy. We need to try to please everyone in the difficult world of bigwigs and businessmen in order to conclude the most profitable deal and become a winner.",
+    "price": 13,
+    "picture": "https://s3-goods.ozstatic.by/2000/894/560/10/10560894_0.jpg",
+    "tags": ["Crime", "Spies"],
+    "rating": []
+  },
+  {
+    "id": 10,
+    "title": "Red 7",
+    "description": "The rules are simple: collect the best combination of cards to lead at the end of the turn. But at any moment the rules may change - and the winning combination will be a losing one!",
+    "price": 9,
+    "picture": "https://s1-goods.ozstatic.by/2000/680/630/10/10630680_0.jpg",
+    "tags": ["Abstract"],
+    "rating": []
+  },
+  {
+    "id": 11,
+    "title": "Fluxx Zombies",
+    "description": "Everything changes when they come ... Shuffling gait, outstretched arms, lingering moan `Brains!` ... What to do ?! You can search in the pantry for a chainsaw. Or hammer the door. Or maybe train the walking dead to participate in the Major League? Think faster before the zombies get to you! Draw a card, play a card, shoot zombies that prevent you from winning ... But the rules have changed - now you just can not do without a couple of the living dead. In `Fluxx Zombies`, only players can decide whether or not to be a zombie apocalypse.",
+    "price": 10,
+    "picture": "https://s5-goods.ozstatic.by/2000/209/397/10/10397209_0.jpg",
+    "tags": ["Zombie", "Humor"],
+    "rating": []
   }
 ]

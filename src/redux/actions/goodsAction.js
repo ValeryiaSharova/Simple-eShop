@@ -30,6 +30,7 @@ export const loadGoods = () => dispatch => {
     .then(({ data }) => {
       dispatch(setGoodsLoaded());
       dispatch(setGoods(data));
+      dispatch(updateGoods(data));
     })
     .catch(error => {
       dispatch(setGoodsFail(error));
@@ -45,11 +46,13 @@ export const setRating = (id, rating) => (dispatch, getState) => {
     return good;
   });
   dispatch(setGoods(updatedGoods));
+  dispatch(updateGoods(updatedGoods));
 };
 
 export const deleteRating = (id, mail) => (dispatch, getState) => {
   const { goods } = getState();
-  const updatedGoods = goods.goodsData.map(good => {
+  const { goodsData } = goods;
+  const updatedGoods = goodsData.map(good => {
     if (good.id === id) {
       const ratingId = good.rating.indexOf(mail);
       good.rating.splice(ratingId, 1);
@@ -110,4 +113,21 @@ export const search = input => (dispatch, getState) => {
   const updatedGoods = goodsData.filter(good =>
     tags.every(tag => good.tags.map(goodTag => goodTag.toLowerCase()).includes(tag)));
   return dispatch(updateGoods(updatedGoods));
+};
+
+export const getEvaluatedGoods = (mail, switchState) => (dispatch, getState) => {
+  const { goods } = getState();
+  const { goodsData } = goods;
+  if (switchState) {
+    dispatch(updateGoods(goodsData));
+  } else {
+    const updatedGoods = goodsData.filter(good => good.rating.some(rating => rating.mail === mail));
+    dispatch(updateGoods(updatedGoods));
+  }
+};
+
+export const getAllGoods = () => (dispatch, getState) => {
+  const { goods } = getState();
+  const { goodsData } = goods;
+  dispatch(updateGoods(goodsData));
 };

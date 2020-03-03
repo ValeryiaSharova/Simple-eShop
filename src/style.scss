@@ -11,8 +11,17 @@ $font_2: cursive;
 .divleft {
   margin-left: 70%;
 }
+.page-link {
+  color: $black;
+  &:hover {
+    color: $color_1;
+  }
+}
 .rating {
   vertical-align: middle;
+}
+.pagination-padding {
+  padding-top: 15px;
 }
 .nav-greeting {
   background-color: $color_1;

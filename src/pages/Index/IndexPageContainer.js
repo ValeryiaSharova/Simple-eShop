@@ -26,6 +26,7 @@ const mapDispatchToProps = dispatch => {
     search,
     setRating,
     deleteRating,
+    getEvaluatedGoods,
   } = bindActionCreators(actionsGood, dispatch);
   const { loadUsers } = bindActionCreators(actionsUser, dispatch);
 
@@ -39,6 +40,7 @@ const mapDispatchToProps = dispatch => {
     search,
     setRating,
     deleteRating,
+    getEvaluatedGoods,
   };
 };
 

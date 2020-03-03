@@ -10,6 +10,7 @@ import AddGood from '../Admin/components/DialogAddGood';
 import Spinner from '../../sharedComponents/Spinner/Spinner';
 import Search from './components/Search';
 import MySwitch from './components/MySwitch';
+import Pagination from '../../sharedComponents/Pagination/Pagination';
 
 const Page = props => {
   const {
@@ -30,8 +31,18 @@ const Page = props => {
     setRating,
     deleteRating,
     users,
+    getEvaluatedGoods,
   } = props;
   const { role } = currentUser;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [goodsPerPage] = useState(3);
+
+  const indexOfLastGood = currentPage * goodsPerPage;
+  const indexOfFirstGood = indexOfLastGood - goodsPerPage;
+  const currentGoods = goods.slice(indexOfFirstGood, indexOfLastGood);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
     if (!loadedGoods) {
@@ -44,6 +55,7 @@ const Page = props => {
 
   const handleChangeSwitch = event => {
     setSwitchState(event.target.checked);
+    getEvaluatedGoods(currentUser.mail, switchState);
   };
 
   if (loadingGoods || loadingUsers) {
@@ -83,10 +95,11 @@ const Page = props => {
         </Grid>
         <Grid item>Evaluated goods</Grid>
       </Grid>
+      <Pagination goodsPerPage={goodsPerPage} totalGoods={goods.length} paginate={paginate} />
       <hr />
       <div className="card-columns">
         {!switchState
-          ? goods.map(good => (
+          ? currentGoods.map(good => (
             <Card
               {...good}
               key={good.id}
@@ -100,20 +113,19 @@ const Page = props => {
               users={users}
             />
           ))
-          : goods
-            .filter(good => good.rating.some(rating => rating.mail === currentUser.mail))
-            .map(good => (
-              <Card
-                {...good}
-                key={good.id}
-                role={role}
-                addToCart={addToCart}
-                setRating={setRating}
-                currentUser={currentUser}
-                deleteRating={deleteRating}
-                users={users}
-              />
-            ))}
+          : currentGoods.map(good => (
+            <Card
+              {...good}
+              key={good.id}
+              role={role}
+              addToCart={addToCart}
+              setRating={setRating}
+              currentUser={currentUser}
+              deleteRating={deleteRating}
+              users={users}
+            />
+          ))}
+
         <div>
           {role === 'admin' ? (
             <ModalConsumer>
@@ -140,6 +152,7 @@ const Page = props => {
           )}
         </div>
       </div>
+      <Pagination goodsPerPage={goodsPerPage} totalGoods={goods.length} paginate={paginate} />
       <hr />
       <Footer />
     </div>
@@ -164,6 +177,7 @@ Page.propTypes = {
   setRating: PropTypes.func.isRequired,
   deleteRating: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  getEvaluatedGoods: PropTypes.func.isRequired,
 };
 
 Page.defaultProps = {

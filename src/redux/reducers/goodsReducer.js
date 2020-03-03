@@ -33,7 +33,6 @@ const reducer = handleActions(
     [setGoods]: (state, { payload: { goods } }) => ({
       ...state,
       goodsData: goods,
-      visibleGoods: goods,
       loading: false,
     }),
     [updateGoods]: (state, { payload: { goods } }) => ({
