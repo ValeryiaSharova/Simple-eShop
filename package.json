@@ -14,7 +14,7 @@
     "fetch": "^1.1.0",
     "formik": "^2.1.4",
     "material": "^0.4.3",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "proptypes": "^1.1.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
