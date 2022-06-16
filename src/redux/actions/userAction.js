@@ -1,5 +1,5 @@
-import { createActions } from 'redux-actions';
-import axios from '../axiosInstanse';
+import { createActions } from "redux-actions";
+import axios from "../axiosInstanse";
 
 export const {
   deleteUser,
@@ -15,58 +15,60 @@ export const {
   setUsersFail,
   updateUsers,
 } = createActions({
-  DELETE_USER: mail => ({ mail }),
+  DELETE_USER: (mail) => ({ mail }),
   ADD_USER: (user, updatedUsers) => ({ user, updatedUsers }),
-  SET_REGISTRATION_ERROR: error => ({ error }),
-  LOGIN: user => ({ user }),
-  SET_LOGIN_ERROR: error => ({ error }),
+  SET_REGISTRATION_ERROR: (error) => ({ error }),
+  LOGIN: (user) => ({ user }),
+  SET_LOGIN_ERROR: (error) => ({ error }),
   LOGOUT: () => ({}),
-  CHANGE_NAME: user => ({ user }),
-  REQUEST_FOR_DELETE: mail => ({ mail }),
-  SET_USERS: users => ({ users }),
+  CHANGE_NAME: (user) => ({ user }),
+  REQUEST_FOR_DELETE: (mail) => ({ mail }),
+  SET_USERS: (users) => ({ users }),
   SET_USERS_START: () => ({}),
-  SET_USERS_FAIL: error => ({ error }),
-  UPDATE_USERS: users => ({ users }),
+  SET_USERS_FAIL: (error) => ({ error }),
+  UPDATE_USERS: (users) => ({ users }),
 });
 
-export const loadUsers = () => dispatch => {
+export const loadUsers = () => (dispatch) => {
   dispatch(setUsersStart());
   axios
-    .get('/users.json')
+    .get("https://api.jsonbin.io/b/62ab3e28402a5b38022ab6b5")
     .then(({ data }) => {
       dispatch(setUsers(data));
     })
-    .catch(error => {
+    .catch((error) => {
       dispatch(setUsersFail(error));
     });
 };
 
-export const signin = user => (dispatch, getState) => {
+export const signin = (user) => (dispatch, getState) => {
   const { users } = getState();
-  const userInfo = users.usersData.find(userFind => userFind.mail === user.mail);
+  const userInfo = users.usersData.find(
+    (userFind) => userFind.mail === user.mail
+  );
   if (userInfo) {
     if (userInfo.pass === user.pass) {
       dispatch(login(userInfo));
     } else {
-      dispatch(setLoginError('error'));
+      dispatch(setLoginError("error"));
     }
   } else {
-    dispatch(setLoginError('error'));
+    dispatch(setLoginError("error"));
   }
 };
 
-export const registration = user => (dispatch, getState) => {
+export const registration = (user) => (dispatch, getState) => {
   const { users } = getState();
   const { usersData } = users;
-  const userInfo = usersData.find(userFind => userFind.mail === user.mail);
+  const userInfo = usersData.find((userFind) => userFind.mail === user.mail);
   if (!userInfo) {
     const updatedUsers = [...usersData, user];
     return dispatch(addUser(user, updatedUsers));
   }
-  return dispatch(setRegistrationError('error'));
+  return dispatch(setRegistrationError("error"));
 };
 
-export const search = input => (dispatch, getState) => {
+export const search = (input) => (dispatch, getState) => {
   const { users } = getState();
   const { usersData } = users;
   const info = input.toLowerCase().trim();
@@ -74,10 +76,10 @@ export const search = input => (dispatch, getState) => {
     return dispatch(updateUsers(usersData));
   }
   const updatedUsers = usersData.filter(
-    user =>
-      user.fname.toLowerCase() === info
-      || user.lname.toLowerCase() === info
-      || user.mail.toLowerCase().indexOf(info) > -1
+    (user) =>
+      user.fname.toLowerCase() === info ||
+      user.lname.toLowerCase() === info ||
+      user.mail.toLowerCase().indexOf(info) > -1
   );
   return dispatch(updateUsers(updatedUsers));
 };
