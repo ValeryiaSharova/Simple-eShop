@@ -1,69 +1,58 @@
-## Simple-eShop
-This project is a prototype of simple shop where users can buy board games.
 
-## Available Scripts
+# Simple eShop
 
-In the project directory, you can run:
+Online board game shop where you can choose, evaluate and buy goods.
 
-### `npm start`
+## 🛠 Stacks
+React, Redux, SASS
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+## Run Locally
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone the project
 
-### `npm run build`
+```bash
+  git clone https://github.com/ValeryiaSharova/Simple-eShop
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Go to the project directory
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```bash
+  cd Simple-eShop
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install dependencies
 
-### `npm run eject`
+```bash
+  npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Start the server
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+  npm run start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Demo
 
-## Learn More
+Link to deployment: https://simple-e-shop.vercel.app/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Screenshots
 
-### Code Splitting
+This is how look like admin role.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Admin page for users control.
 
-### Analyzing the Bundle Size
+![App Screenshot](https://i.ibb.co/nfTw6fY/1.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Main page for admin.
 
-### Making a Progressive Web App
+![App Screenshot](https://i.ibb.co/0B05LMp/2.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Editing goods.
 
-### Advanced Configuration
+![App Screenshot](https://i.ibb.co/H2CrQp4/3.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
