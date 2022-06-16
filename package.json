@@ -14,7 +14,6 @@
     "fetch": "^1.1.0",
     "formik": "^2.1.4",
     "material": "^0.4.3",
-    "node-sass": "^7.0.0",
     "proptypes": "^1.1.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
@@ -27,7 +26,6 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "route": "^0.2.5",
-    "sass": "^1.23.7",
     "yup": "^0.28.1"
   },
   "scripts": {
@@ -55,6 +53,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier-eslint": "^9.0.1"
+    "prettier-eslint": "^9.0.1",
+    "sass": "^1.52.3"
   }
 }
