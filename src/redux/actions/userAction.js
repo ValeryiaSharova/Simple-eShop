@@ -1,5 +1,5 @@
-import { createActions } from "redux-actions";
-import axios from "../axiosInstanse";
+import { createActions } from 'redux-actions';
+import axios from '../axiosInstanse';
 
 export const {
   deleteUser,
@@ -32,7 +32,11 @@ export const {
 export const loadUsers = () => (dispatch) => {
   dispatch(setUsersStart());
   axios
-    .get("https://api.jsonbin.io/b/62ab3e28402a5b38022ab6b5")
+    .get('/b/62ab3e28402a5b38022ab6b5', {
+      headers: {
+        'X-Bin-Meta': false,
+      },
+    })
     .then(({ data }) => {
       dispatch(setUsers(data));
     })
@@ -50,10 +54,10 @@ export const signin = (user) => (dispatch, getState) => {
     if (userInfo.pass === user.pass) {
       dispatch(login(userInfo));
     } else {
-      dispatch(setLoginError("error"));
+      dispatch(setLoginError('error'));
     }
   } else {
-    dispatch(setLoginError("error"));
+    dispatch(setLoginError('error'));
   }
 };
 
@@ -65,7 +69,7 @@ export const registration = (user) => (dispatch, getState) => {
     const updatedUsers = [...usersData, user];
     return dispatch(addUser(user, updatedUsers));
   }
-  return dispatch(setRegistrationError("error"));
+  return dispatch(setRegistrationError('error'));
 };
 
 export const search = (input) => (dispatch, getState) => {

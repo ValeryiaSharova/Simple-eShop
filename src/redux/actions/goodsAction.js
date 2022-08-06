@@ -1,5 +1,5 @@
-import { createActions } from "redux-actions";
-import axios from "../axiosInstanse";
+import { createActions } from 'redux-actions';
+import axios from '../axiosInstanse';
 
 export const {
   deleteGood,
@@ -26,7 +26,11 @@ export const {
 export const loadGoods = () => (dispatch) => {
   dispatch(setGoodsStart());
   axios
-    .get("https://api.jsonbin.io/b/62ab3dc7449a1f38210bee5f")
+    .get('b/62ab3dc7449a1f38210bee5f', {
+      headers: {
+        'X-Bin-Meta': false,
+      },
+    })
     .then(({ data }) => {
       dispatch(setGoodsLoaded());
       dispatch(setGoods(data));
@@ -66,9 +70,9 @@ export const addGood = (good) => (dispatch, getState) => {
   const { goods } = getState();
   const { goodsData } = goods;
   const tags = good.tags
-    .replace(/  +/g, " ")
+    .replace(/  +/g, ' ')
     .trim()
-    .split(" ");
+    .split(' ');
   const correctGood = { ...good, id: goodsData.length + 1, tags };
   const updatedGoodsData = [...goodsData, { ...correctGood }];
   dispatch(setGoods(updatedGoodsData));
@@ -79,11 +83,11 @@ export const editGood = (good) => (dispatch, getState) => {
   const { goods } = getState();
   const { goodsData } = goods;
   let updatedGood = {};
-  if (typeof good.tags === "string") {
+  if (typeof good.tags === 'string') {
     const tags = good.tags
-      .replace(/  +/g, " ")
+      .replace(/  +/g, ' ')
       .trim()
-      .split(" ");
+      .split(' ');
     updatedGood = {
       ...goodsData.find((goodFind) => goodFind.id === good.id),
       ...good,
@@ -111,9 +115,9 @@ export const search = (input) => (dispatch, getState) => {
   const { goodsData } = goods;
   const tags = input
     .toLowerCase()
-    .replace(/  +/g, " ")
+    .replace(/  +/g, ' ')
     .trim()
-    .split(" ");
+    .split(' ');
   if (tags[0].length === 0) {
     return dispatch(updateGoods(goodsData));
   }
